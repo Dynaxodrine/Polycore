@@ -17,7 +17,6 @@ namespace Polycore
                         "~/Scripts/jquery.elastic.source.js",
                         "~/Scripts/jquery.carouFredSel-6.2.1-packed.js",
                         "~/Scripts/jquery-ui-1.10.3.custom.min.js",
-                        "~/Scripts/jquery.ui.totop.js",
                         "~/Scripts/jquery.validate.min.js",
                         "~/Scripts/login-with-ajax.js",
                         "~/Scripts/bootstrap-button.js",
