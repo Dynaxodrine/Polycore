@@ -215,6 +215,7 @@
     <Content Include="Content\img\contact-icons\wordpress.png" />
     <Content Include="Content\img\contact-icons\youtube.png" />
     <Content Include="Content\img\controls.png" />
+    <Content Include="Content\img\DaVinciMarker.png" />
     <Content Include="Content\img\defaults\1170x203.jpg" />
     <Content Include="Content\img\defaults\140x102.jpg" />
     <Content Include="Content\img\defaults\1920x1035.jpg" />

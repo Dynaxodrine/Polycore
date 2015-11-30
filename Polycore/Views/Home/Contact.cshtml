@@ -1,17 +1,113 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<div class="span12 block-title centered">
+    <h2>howdy there</h2>
+    <p>Why not leave a message or give us a call?</p>
+</div>
+<div class="span12 block-divider"></div>
+<div class="gmap span12">
+    <div id="map-canvas"></div>
+</div>
+<div class="span12 block-divider"></div>
+<div class="span12">
+    <div class="template-wrapper">
+        <div class="block block-contactform_block span7 first cf">
+            <div class="title-wrapper">
+                <h3 class="widget-title">CONTACT FORM</h3>
+                <div class="clear"></div>
+            </div>
+            <div class="wcontainer">
+                <form action="http://skywarriorthemes.com/gameaddict/contact/" id="contactForm" class="contact" method="post" novalidate="novalidate">
+                    <ul class="contactform controls">
+                        <li class="input-prepend">
+                            <span class="add-on"><i class="icon-user"></i></span>
+                            <input type="text" name="contactName" placeholder="Name*" id="contactName" value="" class="required requiredField">
+                        </li>
+                        <li class="input-prepend">
+                            <span class="add-on"><i class="icon-envelope"></i></span>
+                            <input type="text" placeholder="Email*" name="email" id="email" value="" class="required requiredField email">
+                        </li>
+                        <li class="input-prepend">
+                            <span class="add-on"><i class="icon-comment"></i></span>
+                            <input type="text" placeholder="Subject" name="subject" id="subject" value="" class="subject">
+                        </li>
+                        <li class="input-prepend">
+                            <span class="add-on"><i class="icon-align-justify"></i></span>
+                            <textarea name="comments" placeholder="Your message*" id="commentsText" rows="20" cols="30" class="required requiredField"></textarea>
+                        </li>
+                        <li>
+                            <input type="submit" class="button-green button-small" value="Send email">
+                        </li>
+                    </ul>
+                    <input type="hidden" name="submitted" id="submitted" value="true">
+                </form>
+            </div>
+        </div>
+        <div class="block block-column_block span5  cf">
+            <div class="block block-social_block span12 first cf">
+                <div class="title-wrapper">
+                    <h3 class="widget-title">Find us on</h3>
+                    <div class="clear"></div>
+                </div>
+                <div class="wcontainer">
+                    <ul class="social-media">
+                        <li><a data-original-title="Rss" data-toggle="tooltip" class="rss" target="_blank" href="#"><i class="fa fa-rss"></i> </a></li>
+                        <li><a data-original-title="Dribbble" data-toggle="tooltip" class="dribbble" target="_blank" href="#"><i class="fa fa-dribbble"></i> </a></li>
+                        <li> <a data-original-title="Vimeo" data-toggle="tooltip" class="vimeo" target="_blank" href="#"><i class="fa fa-vimeo-square"></i> </a></li>
+                        <li><a data-original-title="Youtube" data-toggle="tooltip" class="youtube" target="_blank" href=""><i class="fa fa-youtube"></i> </a></li>
+                        <li><a data-original-title="Twitch" data-toggle="tooltip" class="twitch" target="_blank" href=""><i class="fa fa-gamepad"></i></a></li>
+                        <li> <a data-original-title="Linked in" data-toggle="tooltip" class="linked-in" target="_blank" href="#"><i class="fa fa-linkedin"></i> </a></li>
+                        <li> <a data-original-title="Google plus" data-toggle="tooltip" class="google-plus" target="_blank" href="#"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a data-original-title="Twitter" data-toggle="tooltip" class="twitter" target="_blank" href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a data-original-title="Facebook" data-toggle="tooltip" class="facebook" target="_blank" href="#"><i class="fa fa-facebook"></i></a></li>
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <div class="block block-text_block span12 first cf">
+                <div class="title-wrapper">
+                    <h3 class="widget-title">How to reach us</h3>
+                    <div class="clear"></div>
+                </div>
+                <div class="wcontainer">
+                    <p><strong><i class="icon-envelope"></i> test@example.com&nbsp;</strong>
+                    </p>
+                    <p><strong><i class="icon-phone"></i>&nbsp;(+555) 5555555555</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+</div>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+		    <!--Google map -->
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script>
+            function initialize() {
+          var mapOptions = {
+            zoom: 12,
+            center: new google.maps.LatLng("51.848840", "4.966996"),
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          }
+          var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+          var contentString = 'DaVinci College';
+          var infowindow = new google.maps.InfoWindow({
+              content: contentString
+          });
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+          var image = "/Content/img/DaVinciMarker.png";
+                var myLatLng = new google.maps.LatLng("51.848840", "4.966996");
+          var marker = new google.maps.Marker({
+              position: myLatLng,
+              map: map,
+              icon: image
+          });
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(map,marker);
+          });
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+</script>
