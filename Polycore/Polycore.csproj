@@ -276,7 +276,6 @@
     <Content Include="Content\ui.totop.css" />
     <Content Include="Content\woocommerce.css" />
     <Content Include="Content\woocommerce2.css" />
-    <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\star.svg" />
