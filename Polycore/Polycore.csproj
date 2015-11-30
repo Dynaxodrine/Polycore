@@ -261,6 +261,9 @@
     <Content Include="Content\img\shadowbox\fancybox_overlay.png" />
     <Content Include="Content\img\shadowbox\fancybox_sprite.png" />
     <Content Include="Content\img\stripe.png" />
+    <Content Include="Content\img\team\HugoC4.jpg" />
+    <Content Include="Content\img\team\JeffreyZwirs.png" />
+    <Content Include="Content\img\team\JoostHerwaarden.jpg" />
     <Content Include="Content\img\tick.png" />
     <Content Include="Content\isotopegallery.css" />
     <Content Include="Content\jquery.fancybox.css" />
