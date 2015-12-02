@@ -40,15 +40,16 @@
                             </li>
                             <li>
                                 <a href="@Url.Action("Contact", "Home", new { area = "" })">Contact</a>
-                            </li>                            
+                            </li>                                                                                 
                         </ul>
-                    </div>
-                    <a href="#myModalL" role="button" data-toggle="modal" class="account"><img src="/Content/img/account.png"></a>
+                    </div>                                      
+                    <div style="float: right">
+                        @Html.Partial("_LoginPartial")
+                    </div>                     
                     <form method="get" id="header-searchform" action="http://skywarriorthemes.com/gameaddict/">
                         <input autocomplete="off" value="" name="s" id="header-s" type="text">
                         <input id="header-searchsubmit" value="Search" type="submit">
-
-                    </form>
+                    </form>                 
                 </div>
                 <!--/.nav-collapse -->
             </div>
@@ -60,8 +61,6 @@
                 <h3>Login</h3>
             </div>
             <div class="modal-body">
-
-                @Html.Partial("_LoginPartial")
                 <div id="LoginWithAjax" class="default">
                     <span id="LoginWithAjax_Status"></span>
                     <form name="LoginWithAjax_Form" id="LoginWithAjax_Form" action="http://skywarriorthemes.com/gameaddict/wp-login.php?callback=?&amp;template=" method="post">
