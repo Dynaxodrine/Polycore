@@ -8,7 +8,8 @@ namespace Polycore
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/Bundles/scripts").Include(
+            bundles.Add(new ScriptBundle("~/Bundles/jqueryval").Include());
+           bundles.Add(new ScriptBundle("~/Bundles/scripts").Include(
                         "~/Scripts/jquery.js",
                         "~/Scripts/jquery.cookie.pack.js",
                         "~/Scripts/jquery-ui.js",

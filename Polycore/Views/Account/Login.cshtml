@@ -1,63 +1,78 @@
 ﻿@using Polycore.Models
-@model LoginViewModel
+@model RegisterViewModel
 @{
-    ViewBag.Title = "Log in";
+    ViewBag.Title = "Log In";
 }
-
-<h2>@ViewBag.Title</h2>
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Username, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
-                    </div>
-                </div><br />
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div><br />
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
-                        </div>
-                    </div>
-                </div><br />
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
-                    </div>
-                </div>
-                <p>
-                    @Html.ActionLink("Register as a new user", "Register")
-                </p>
-                @* Enable this once you have account confirmation enabled for password reset functionality
-                    <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
-            }
-        </section>
+<div class="span12 block-title centered">
+    <h2>Welcome Back!</h2>
+    <p>Stuff stuff</p>
+</div>
+<div class="span12 block-divider"></div>
+<div class="block block-contactform_block span6 first cf">
+    <div class="title-wrapper">
+        <h3 class="widget-title"><i class="fa fa-user"></i> Log In</h3>
+        <div class="clear"></div>
     </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
+    <div class="wcontainer">
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "contact", role = "form", novalidate = "novalidate" }))
+        {
+            if (ViewBag.Controller == "Login")
+            {
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+            }
+            @Html.AntiForgeryToken()
+            <ul class="contactform controls">
+                <li class="input-prepend">
+                    <span class="add-on"><i class="icon-user"></i></span>
+                    @Html.TextBoxFor(m => m.Username, new { @class = "required requiredField", placeholder = "Username or Email" })
+                </li>
+                <li class="input-prepend">
+                    <span class="add-on"><i class="icon-asterisk"></i></span>
+                    @Html.PasswordFor(m => m.Password, new { @class = "required requiredField", placeholder = "Password" })
+                </li>
+                <li>
+                    <input type="submit" class="button-green button-small" value="Log In">
+                </li>
+            </ul>
+            <input type="hidden" name="submitted" id="submitted" value="true">
+        }
     </div>
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+<div class="block block-contactform_block span6 cf">
+    <div class="title-wrapper">
+        <h3 class="widget-title"><i class="fa fa-user"></i> Register</h3>
+        <div class="clear"></div>
+    </div>
+    <div class="wcontainer">
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "contact", role = "form", novalidate = "novalidate" }))
+        {
+            if (ViewBag.Controller == "Register")
+            {
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+            }
+            @Html.AntiForgeryToken()
+            <ul class="contactform controls">
+                <li class="input-prepend">
+                    <span class="add-on"><i class="icon-user"></i></span>
+                    @Html.TextBoxFor(m => m.Username, new { @class = "required requiredField", placeholder = "Username" })
+                </li>
+                <li class="input-prepend">
+                    <span class="add-on"><i class="icon-envelope"></i></span>
+                    @Html.TextBoxFor(m => m.Email, new { @class = "required requiredField email", placeholder = "Email", type = "email" })
+                </li>
+                <li class="input-prepend">
+                    <span class="add-on"><i class="icon-asterisk"></i></span>
+                    @Html.PasswordFor(m => m.Password, new { @class = "required requiredField", placeholder = "Password" })
+                </li>
+                <li class="input-prepend">
+                    <span class="add-on"><i class="icon-asterisk"></i></span>
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "required requiredField", placeholder = "Confrim Password" })
+                </li>
+                <li>
+                    <input type="submit" class="button-green button-small" value="Register">
+                </li>
+            </ul>
+            <input type="hidden" name="submitted" id="submitted" value="true">
+        }
+    </div>
+</div>

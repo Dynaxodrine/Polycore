@@ -53,11 +53,22 @@ namespace Polycore.Controllers
         }
 
         //
+        // GET: /Account/Register
+        [AllowAnonymous]
+        public ActionResult Register(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            ViewBag.Controller = "Register";
+            return View("Login");
+        }
+
+        //
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
+            ViewBag.Controller = "Login";
             return View();
         }
 
@@ -68,9 +79,10 @@ namespace Polycore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+            ViewBag.Controller = "Login";
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return View(new RegisterViewModel() { Username = model.Username, Password = model.Password });
             }
 
             // This doesn't count login failures towards account lockout
@@ -79,7 +91,7 @@ namespace Polycore.Controllers
             if (user == null)
             {
                 ModelState.AddModelError("", "Invalid login attempt.");
-                return View(model);
+                return View(new RegisterViewModel() { Username = model.Username, Password = model.Password });
             }
 
             var result = await SignInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, shouldLockout: false);
@@ -94,7 +106,7 @@ namespace Polycore.Controllers
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
+                    return View(new RegisterViewModel() { Username = model.Username, Password = model.Password });
             }
         }
 
@@ -142,14 +154,6 @@ namespace Polycore.Controllers
         }
 
         //
-        // GET: /Account/Register
-        [AllowAnonymous]
-        public ActionResult Register()
-        {
-            return View();
-        }
-
-        //
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
@@ -176,7 +180,8 @@ namespace Polycore.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            ViewBag.Controller = "Register";
+            return View("Login", model);
         }
 
         //
