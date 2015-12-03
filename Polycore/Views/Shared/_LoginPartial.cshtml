@@ -1,23 +1,35 @@
 ﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated)
-{
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-    {
-    @Html.AntiForgeryToken()
+<div class="menu-main-container">
+    <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <a href="#" onclick="event.preventDefault();" id="dLabel">
+                <img src="/Content/img/account.png">
+            </a>
+            <ul class="sub-menu dropdown-menu pull-left">
+                @if (Request.IsAuthenticated) // If the user is logged in correctly.
+                {
+                    <li>
+                        <span>Hello @User.Identity.GetUserName()!</span>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Manage")">Manage</a>
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                    </li>
+                    <li>@*This executes the form below. Didn't put it here because of styling issues*@
+                        <a href="#" onclick="document.getElementById('logoutForm').submit()">Log off</a>
+                    </li>
+                }
+                else //Otherwise
+                {
+                    <li><a tabindex="-1" href="@Url.Action("Login", "Account")">Log in</a></li>
+                    <li><a tabindex="-1" href="@Url.Action("Register", "Account")">Register</a></li>
+                }
+            </ul>
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
     </ul>
-    }
-}
-else
+</div>
+@*Logoff form*@
+@using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class="hidden"}))
 {
-    <ul class="nav navbar-nav navbar-right">
-        @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-        <li><a href="#myModalL" role="button" data-toggle="modal" class="account"><img src="/Content/img/account.png"></a></li>
-    </ul>
+    @Html.AntiForgeryToken()
 }
