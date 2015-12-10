@@ -4,6 +4,7 @@ using Polycore.Models;
 
 namespace Polycore.Migrations
 {
+    using Microsoft.AspNet.Identity;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -30,10 +31,32 @@ namespace Polycore.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-            context.Roles.AddOrUpdate(new IdentityRole() { Name = "Administrator", Id = "admin" });
-            context.Roles.AddOrUpdate(new IdentityRole() { Name = "Moderator", Id = "mod" });
-            context.Roles.AddOrUpdate(new IdentityRole() { Name = "Editor", Id = "editor" });
-            context.Roles.AddOrUpdate(new IdentityRole() { Name = "Member", Id = "member" });
+
+            if (!context.Roles.Any(r => r.Name == "Administrator" 
+                                        && r.Name == "Moderator" 
+                                        && r.Name == "Editor" 
+                                        && r.Name == "Member"))
+            {
+                context.Roles.AddOrUpdate(new IdentityRole() { Name = "Administrator" });
+                context.Roles.AddOrUpdate(new IdentityRole() { Name = "Moderator" });
+                context.Roles.AddOrUpdate(new IdentityRole() { Name = "Editor" });
+                context.Roles.AddOrUpdate(new IdentityRole() { Name = "Member" });
+            }
+
+            if (!context.Users.Any(u => u.Email == "jeffreyzwirs@gmail.com"))
+            {
+                var store = new UserStore<ApplicationUser>(context);
+                var manager = new UserManager<ApplicationUser>(store);
+                var user = new ApplicationUser
+                {
+                    UserName = "JeffreyZwirs",
+                    Email = "jeffreyzwirs@gmail.com",
+                };
+
+                manager.Create(user, "123456");
+                manager.AddToRole(user.Id, "Administrator");
+                manager.AddToRole(user.Id, "Member");
+            }
         }
     }
 }
