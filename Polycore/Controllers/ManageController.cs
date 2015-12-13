@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Polycore.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Polycore.Controllers
 {
@@ -32,9 +33,9 @@ namespace Polycore.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -318,6 +319,52 @@ namespace Polycore.Controllers
             }
             var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
+        }
+
+        [Authorize(Roles = "Administrator")]
+        public ActionResult IndexUsers(ApplicationDbContext model)
+        {
+            return View(model.Users.ToList());
+        }
+
+        [Authorize(Roles = "Administrator")]
+        public ActionResult DetailsUsers(ApplicationDbContext model, string id)
+        {
+            ApplicationUser user = model.Users.Find(id);
+
+            var userroles = UserManager.GetRoles(id);
+            var roles = new UserRoleViewModel
+            {
+                UserId = user.Id,
+                UserName = user.UserName,
+                RoleList = userroles.ToList()
+            };
+
+            return View(roles);
+        }
+
+        [Authorize(Roles = "Administrator")]
+        public ActionResult AddRoleToUser(ApplicationDbContext model, string id)
+        {
+            ApplicationUser user = model.Users.Find(id);
+
+            var roles = new AddUserRoleViewModel
+            {
+                UserId = user.Id,
+                UserName = user.UserName,
+                RoleList = model.Roles,
+            };
+            
+            return View(roles);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddRoleToUser(ApplicationDbContext model, string rolename, string id)
+        {
+            UserManager.AddToRole(id, rolename);
+
+            return RedirectToAction("DetailsUsers", new { id = id });
         }
 
         protected override void Dispose(bool disposing)

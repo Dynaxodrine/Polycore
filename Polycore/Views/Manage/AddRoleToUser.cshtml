@@ -1,0 +1,27 @@
+﻿@model Polycore.Models.AddUserRoleViewModel
+@{
+    ViewBag.Title = "Add role to user";
+}
+
+<h2>Add role to @Model.UserName.</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div>        
+        <select name="rolename">
+            <option></option>
+            @foreach(var item in Model.RoleList)
+            {                
+                <option value="@item.Name">@item.Name</option>
+            }
+        </select>
+    </div>
+    
+    <input type="submit" value="Add">
+}
+
+<p>
+    @Html.ActionLink("Back", "DetailsUsers", new { id = Model.UserId })
+</p>

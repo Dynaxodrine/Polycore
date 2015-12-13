@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Polycore.Models
 {
@@ -82,5 +83,23 @@ namespace Polycore.Models
     {
         public string SelectedProvider { get; set; }
         public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
+    }
+
+    public class UserRoleViewModel
+    {
+        public string UserId { get; set; }
+
+        public string UserName { get; set; }
+
+        public List<string> RoleList{ get; set; }
+    }
+
+    public class AddUserRoleViewModel
+    {
+        public string UserId { get; set; }
+
+        public string UserName { get; set; }
+
+        public IEnumerable<IdentityRole> RoleList { get; set; }
     }
 }

@@ -396,6 +396,9 @@
     <Content Include="fonts\WooCommerce.woff" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\nouislider.jquery.json" />
+    <Content Include="Views\Manage\IndexUsers.cshtml" />
+    <Content Include="Views\Manage\DetailsUsers.cshtml" />
+    <Content Include="Views\Manage\AddRoleToUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201511301033017_Age.resx">

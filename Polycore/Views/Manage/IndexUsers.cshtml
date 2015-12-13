@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Polycore.Models.ApplicationUser>
+@{
+    ViewBag.Title = "Users index";
+}
+
+<h2>Users index.</h2>
+
+<table class="tableUsers">
+    <tr>
+        <th>Username</th>
+        <th>Email</th>
+    </tr> 
+    
+    @foreach(var item in Model)
+    {
+        <tr>
+            <td onclick="location.href = '@(Url.Action("DetailsUsers", new { id = item.Id }))'">@item.UserName</td>
+            <td onclick="location.href = '@(Url.Action("DetailsUsers", new { id = item.Id }))'">@item.Email</td>
+        </tr>
+    }
+</table>
+<br />
+<p>
+    @Html.ActionLink("Back", "Index")
+</p>

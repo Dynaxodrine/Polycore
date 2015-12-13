@@ -1,0 +1,27 @@
+﻿@model Polycore.Models.UserRoleViewModel
+@{
+    ViewBag.Title = "User details";
+}
+
+<h2>User details.</h2>
+
+<p>
+    @Html.ActionLink("Add role to ", "AddRoleToUser", new { id = Model.UserId }) @Model.UserName
+</p>
+
+<table class="tableRoles">
+    <tr>
+        <th>Role name</th>
+    </tr>
+    
+    @foreach(var item in Model.RoleList)
+    {
+        <tr>
+            <td>@item</td>
+        </tr>
+    }
+</table>
+<br />
+<p>
+    @Html.ActionLink("Back", "IndexUsers")
+</p>

@@ -32,31 +32,30 @@ namespace Polycore.Migrations
             //    );
             //
 
-            if (!context.Roles.Any(r => r.Name == "Administrator" 
-                                        && r.Name == "Moderator" 
-                                        && r.Name == "Editor" 
-                                        && r.Name == "Member"))
-            {
-                context.Roles.AddOrUpdate(new IdentityRole() { Name = "Administrator" });
-                context.Roles.AddOrUpdate(new IdentityRole() { Name = "Moderator" });
-                context.Roles.AddOrUpdate(new IdentityRole() { Name = "Editor" });
-                context.Roles.AddOrUpdate(new IdentityRole() { Name = "Member" });
-            }
+            context.Roles.AddOrUpdate(new IdentityRole() { Name = "Administrator" });
+            context.Roles.AddOrUpdate(new IdentityRole() { Name = "Moderator" });
+            context.Roles.AddOrUpdate(new IdentityRole() { Name = "Editor" });
+            context.Roles.AddOrUpdate(new IdentityRole() { Name = "Member" });
 
-            if (!context.Users.Any(u => u.Email == "jeffreyzwirs@gmail.com"))
+            var store = new UserStore<ApplicationUser>(context);
+            var manager = new UserManager<ApplicationUser>(store);
+            var user1 = new ApplicationUser
             {
-                var store = new UserStore<ApplicationUser>(context);
-                var manager = new UserManager<ApplicationUser>(store);
-                var user = new ApplicationUser
-                {
-                    UserName = "JeffreyZwirs",
-                    Email = "jeffreyzwirs@gmail.com",
-                };
+                UserName = "JeffreyZwirs",
+                Email = "jeffreyzwirs@gmail.com",
+            };
+            var user2 = new ApplicationUser
+            {
+                UserName = "testtest",
+                Email = "test@gmail.com",
+            };
+                
+            manager.Create(user1, "123456");
+            manager.AddToRole(user1.Id, "Administrator");
+            manager.AddToRole(user1.Id, "Member");
 
-                manager.Create(user, "123456");
-                manager.AddToRole(user.Id, "Administrator");
-                manager.AddToRole(user.Id, "Member");
-            }
+            manager.Create(user2, "123456");
+            manager.AddToRole(user2.Id, "Member");            
         }
     }
 }
