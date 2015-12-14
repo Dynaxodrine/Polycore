@@ -87,19 +87,25 @@ namespace Polycore.Models
 
     public class UserRoleViewModel
     {
+        // Get or Sets the userid
         public string UserId { get; set; }
 
+        // Get or Sets the username
         public string UserName { get; set; }
 
+        // Get or Sets the rolelist
         public List<string> RoleList{ get; set; }
     }
 
     public class AddUserRoleViewModel
     {
+        // Gets or Sets the userid
         public string UserId { get; set; }
-
+        
+        // Gets or Sets the username
         public string UserName { get; set; }
 
+        // Gets or Sets the rolelist
         public IEnumerable<IdentityRole> RoleList { get; set; }
     }
 }

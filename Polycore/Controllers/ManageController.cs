@@ -321,22 +321,26 @@ namespace Polycore.Controllers
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
 
+        // GET: /Manage/IndexUsers/
         [Authorize(Roles = "Administrator")]
         public ActionResult IndexUsers()
         {            
             return View(UserManager.Users.ToList());
         }
 
+        // POST: Manage/DeleteUser/1
         [HttpPost]
         public ActionResult DeleteUser(string id)
         {
             var account = UserManager.FindById(id);
 
+            // Remove user.
             UserManager.Delete(account);
 
             return RedirectToAction("IndexUsers");
         }
 
+        // GET: /Manage/DetailsUsers/1  
         [Authorize(Roles = "Administrator")]
         public ActionResult DetailsUsers(string id)
         {
@@ -353,6 +357,7 @@ namespace Polycore.Controllers
             return View(roles);
         }
 
+        // GET: /Manage/AddRoleToUser/1  
         [Authorize(Roles = "Administrator")]
         public ActionResult AddRoleToUser(ApplicationDbContext model, string id)
         {
@@ -368,23 +373,41 @@ namespace Polycore.Controllers
             return View(roles);
         }
 
+        // POST: Manage/AddRoleToUser/1
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddRoleToUser(string rolename, string id)
+        public ActionResult AddRoleToUser(ApplicationDbContext model, string rolename, string id)
         {
             var account = UserManager.FindById(id);
 
-            UserManager.AddToRole(account.Id, rolename);
+            if (rolename != "")
+            {
+                // Add role to user.
+                UserManager.AddToRole(account.Id, rolename);
 
-            return RedirectToAction("DetailsUsers", new { id = account.Id });
+                return RedirectToAction("DetailsUsers", new { id = account.Id });
+            }
+
+            ViewBag.ErrorResult = "You did not select a role!";
+
+            var roles = new AddUserRoleViewModel
+            {
+                UserId = account.Id,
+                UserName = account.UserName,
+                RoleList = model.Roles,
+            };
+
+            return View(roles);
         }
 
+        // POST: Manage/DeleteRoleFromUser/1
         [HttpPost]
-        public ActionResult DeleteRoleFromUser(string id, string name)
+        public ActionResult DeleteRoleFromUser(string id, string rolename)
         {
             var account = UserManager.FindById(id);
 
-            UserManager.RemoveFromRole(account.Id, name);
+            // Remove role from user.
+            UserManager.RemoveFromRole(account.Id, rolename);
 
             return RedirectToAction("DetailsUsers", new { id = account.Id });
         }
