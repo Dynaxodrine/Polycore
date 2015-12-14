@@ -322,21 +322,31 @@ namespace Polycore.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        public ActionResult IndexUsers(ApplicationDbContext model)
+        public ActionResult IndexUsers()
+        {            
+            return View(UserManager.Users.ToList());
+        }
+
+        [HttpPost]
+        public ActionResult DeleteUser(string id)
         {
-            return View(model.Users.ToList());
+            var account = UserManager.FindById(id);
+
+            UserManager.Delete(account);
+
+            return RedirectToAction("IndexUsers");
         }
 
         [Authorize(Roles = "Administrator")]
-        public ActionResult DetailsUsers(ApplicationDbContext model, string id)
+        public ActionResult DetailsUsers(string id)
         {
-            ApplicationUser user = model.Users.Find(id);
+            var account = UserManager.FindById(id);
 
             var userroles = UserManager.GetRoles(id);
             var roles = new UserRoleViewModel
             {
-                UserId = user.Id,
-                UserName = user.UserName,
+                UserId = account.Id,
+                UserName = account.UserName,
                 RoleList = userroles.ToList()
             };
 
@@ -346,12 +356,12 @@ namespace Polycore.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult AddRoleToUser(ApplicationDbContext model, string id)
         {
-            ApplicationUser user = model.Users.Find(id);
+            var account = UserManager.FindById(id);
 
             var roles = new AddUserRoleViewModel
             {
-                UserId = user.Id,
-                UserName = user.UserName,
+                UserId = account.Id,
+                UserName = account.UserName,
                 RoleList = model.Roles,
             };
             
@@ -360,11 +370,23 @@ namespace Polycore.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddRoleToUser(ApplicationDbContext model, string rolename, string id)
+        public ActionResult AddRoleToUser(string rolename, string id)
         {
-            UserManager.AddToRole(id, rolename);
+            var account = UserManager.FindById(id);
 
-            return RedirectToAction("DetailsUsers", new { id = id });
+            UserManager.AddToRole(account.Id, rolename);
+
+            return RedirectToAction("DetailsUsers", new { id = account.Id });
+        }
+
+        [HttpPost]
+        public ActionResult DeleteRoleFromUser(string id, string name)
+        {
+            var account = UserManager.FindById(id);
+
+            UserManager.RemoveFromRole(account.Id, name);
+
+            return RedirectToAction("DetailsUsers", new { id = account.Id });
         }
 
         protected override void Dispose(bool disposing)
