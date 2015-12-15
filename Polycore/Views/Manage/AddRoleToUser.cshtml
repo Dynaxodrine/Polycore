@@ -1,29 +1,38 @@
 ﻿@model Polycore.Models.AddUserRoleViewModel
 @{
     ViewBag.Title = "Add role to user";
+    if (!User.IsInRole("Administrator"))
+    {
+        Layout = "~/Views/Shared/_Error.cshtml";
+    }
 }
 
+@if (User.IsInRole("Administrator"))
+{
 <h2>Add role to @Model.UserName.</h2>
 
-@using (Html.BeginForm())
+using (Html.BeginForm("AddRoleToUser", "Manage", FormMethod.Post))
 {
-    @Html.AntiForgeryToken()
+    <div>
+        @if (ViewBag.Controller == "AddRoleToUser")
+        {
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+        }
+        @Html.AntiForgeryToken()
 
-    <div>        
         <select name="rolename">
             <option></option>
-            @foreach(var item in Model.RoleList)
-            {                
+            @foreach (var item in Model.RoleList)
+            {
                 <option value="@item.Name">@item.Name</option>
             }
         </select>
-
-        <p class="validation-summary-errors">@ViewBag.ErrorResult</p>
     </div>
-    
+
     <input type="submit" value="Add">
 }
 
 <p>
     @Html.ActionLink("Back", "DetailsUsers", new { id = Model.UserId })
 </p>
+}

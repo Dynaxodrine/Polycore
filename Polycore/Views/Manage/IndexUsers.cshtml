@@ -1,8 +1,14 @@
 ﻿@model IEnumerable<Polycore.Models.ApplicationUser>
 @{
     ViewBag.Title = "Users index";
+    if (!User.IsInRole("Administrator"))
+    {
+        Layout = "~/Views/Shared/_Error.cshtml";
+    }
 }
 
+@if (User.IsInRole("Administrator"))
+{
 <script src="~/Scripts/jquery.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
 
@@ -15,7 +21,7 @@
         <th></th>
     </tr> 
     
-    @foreach(var item in Model)
+    @foreach (var item in Model)
     {
         <tr>
             <td onclick="location.href = '@(Url.Action("DetailsUsers", new { id = item.Id }))'">@item.UserName</td>
@@ -24,11 +30,11 @@
                 @if (item.UserName != User.Identity.Name)
                 {
                     @Ajax.ActionLink("Verwijderen", "DeleteUser", new { id = item.Id }, new AjaxOptions
-                    {
-                        Confirm = "Are you sure user: " + item.UserName + " must be deleted?",
-                        HttpMethod = "Post",
-                        OnSuccess = "window.location.reload()"
-                    })
+               {
+                   Confirm = "Are you sure user: " + item.UserName + " must be deleted?",
+                   HttpMethod = "Post",
+                   OnSuccess = "window.location.reload()"
+               })
                 }
             </td>
         </tr>
@@ -51,3 +57,4 @@
         jQuery(this).removeClass("hover");
     });
 </script>
+}

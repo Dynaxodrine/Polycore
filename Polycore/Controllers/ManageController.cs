@@ -322,10 +322,13 @@ namespace Polycore.Controllers
         }
 
         // GET: /Manage/IndexUsers/
-        [Authorize(Roles = "Administrator")]
         public ActionResult IndexUsers()
-        {            
-            return View(UserManager.Users.ToList());
+        {
+            if (User.IsInRole("Administrator"))
+            {
+                return View(UserManager.Users.ToList());
+            }
+            return View();
         }
 
         // POST: Manage/DeleteUser/1
@@ -341,36 +344,42 @@ namespace Polycore.Controllers
         }
 
         // GET: /Manage/DetailsUsers/1  
-        [Authorize(Roles = "Administrator")]
         public ActionResult DetailsUsers(string id)
         {
-            var account = UserManager.FindById(id);
-
-            var userroles = UserManager.GetRoles(id);
-            var roles = new UserRoleViewModel
+            if (User.IsInRole("Administrator"))
             {
-                UserId = account.Id,
-                UserName = account.UserName,
-                RoleList = userroles.ToList()
-            };
+                var account = UserManager.FindById(id);
 
-            return View(roles);
+                var userroles = UserManager.GetRoles(id);
+                var roles = new UserRoleViewModel
+                {
+                    UserId = account.Id,
+                    UserName = account.UserName,
+                    RoleList = userroles.ToList()
+                };
+
+                return View(roles);
+            }
+            return View();
         }
 
         // GET: /Manage/AddRoleToUser/1  
-        [Authorize(Roles = "Administrator")]
         public ActionResult AddRoleToUser(ApplicationDbContext model, string id)
         {
-            var account = UserManager.FindById(id);
-
-            var roles = new AddUserRoleViewModel
+            if (User.IsInRole("Administrator"))
             {
-                UserId = account.Id,
-                UserName = account.UserName,
-                RoleList = model.Roles,
-            };
-            
-            return View(roles);
+                var account = UserManager.FindById(id);
+
+                var roles = new AddUserRoleViewModel
+                {
+                    UserId = account.Id,
+                    UserName = account.UserName,
+                    RoleList = model.Roles,
+                };
+
+                return View(roles);
+            }
+            return View();
         }
 
         // POST: Manage/AddRoleToUser/1
@@ -388,7 +397,7 @@ namespace Polycore.Controllers
                 return RedirectToAction("DetailsUsers", new { id = account.Id });
             }
 
-            ViewBag.ErrorResult = "You did not select a role!";
+            ModelState.AddModelError("", "You did not select a role.");
 
             var roles = new AddUserRoleViewModel
             {
@@ -397,6 +406,7 @@ namespace Polycore.Controllers
                 RoleList = model.Roles,
             };
 
+            ViewBag.Controller = "AddRoleToUser";
             return View(roles);
         }
 

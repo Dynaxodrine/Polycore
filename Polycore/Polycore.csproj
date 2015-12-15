@@ -401,6 +401,7 @@
     <Content Include="Views\Manage\IndexUsers.cshtml" />
     <Content Include="Views\Manage\DetailsUsers.cshtml" />
     <Content Include="Views\Manage\AddRoleToUser.cshtml" />
+    <Content Include="Views\Shared\_Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201511301033017_Age.resx">

@@ -12,10 +12,10 @@
     <dl class="dl-horizontal">
         @if (User.IsInRole("Administrator"))
         {    
-            <dt>Users and Roles</dt>
+            <dt>Admin dashboard</dt>
             <dd>
                 [
-                    @Html.ActionLink("Users and Roles", "IndexUsers", "Manage")                         
+                    @Html.ActionLink("Manage users and roles", "IndexUsers", "Manage")                         
                 ]
             </dd>
         }

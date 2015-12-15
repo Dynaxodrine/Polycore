@@ -43,11 +43,13 @@ namespace Polycore.Migrations
             {
                 UserName = "JeffreyZwirs",
                 Email = "jeffreyzwirs@gmail.com",
+                EmailConfirmed = true
             };
             var user2 = new ApplicationUser
             {
                 UserName = "testtest",
                 Email = "test@gmail.com",
+                EmailConfirmed = true
             };
                 
             manager.Create(user1, "123456");
