@@ -92,8 +92,12 @@ namespace Polycore.Controllers
             {
                 ModelState.AddModelError("", "Invalid login attempt.");
                 return View(new RegisterViewModel() { Username = model.Username, Password = model.Password });
+            } else if (!user.EmailConfirmed)
+            {
+                ModelState.AddModelError("", "Account not activated.");
+                return View(new RegisterViewModel() { Username = model.Username, Password = model.Password });
             }
-
+                
             var result = await SignInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
@@ -166,7 +170,7 @@ namespace Polycore.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                   // await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false); // DO NOT LOG IN
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
