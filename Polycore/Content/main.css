@@ -43,3 +43,9 @@ tr.hover td
 { 
     background-color:#799ED7; 
 }
+
+.ForgotPass
+{
+    text-align: center;
+    margin: 20px;
+}

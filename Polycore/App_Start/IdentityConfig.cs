@@ -11,15 +11,28 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Polycore.Models;
+using System.Net.Mail;
 
 namespace Polycore
 {
     public class EmailService : IIdentityMessageService
     {
-        public Task SendAsync(IdentityMessage message)
+        public async Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            var myMessage = new MailMessage();
+
+            myMessage.From = new MailAddress("Polycore@info.nl", "Polycore administrator");
+            myMessage.To.Add(message.Destination);
+            myMessage.Subject = message.Subject;
+            myMessage.IsBodyHtml = true;
+
+            myMessage.Body = message.Body;
+
+            using (var client = new SmtpClient())
+            {
+                await client.SendMailAsync(myMessage);
+            }
         }
     }
 
@@ -38,6 +51,12 @@ namespace Polycore
         public ApplicationUserManager(IUserStore<ApplicationUser> store)
             : base(store)
         {
+        }
+
+        public ApplicationUserManager(IUserStore<ApplicationUser> store, IIdentityMessageService emailService)
+            : base(store)
+        {
+            this.EmailService = emailService;
         }
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
