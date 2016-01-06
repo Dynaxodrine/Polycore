@@ -30,7 +30,7 @@ namespace Polycore.Migrations
                 .PrimaryKey(t => t.CategoryId);
             
             CreateTable(
-                "dbo.Messages",
+                "dbo.ForumPosts",
                 c => new
                     {
                         MessageId = c.Single(nullable: false),
@@ -140,7 +140,7 @@ namespace Polycore.Migrations
             DropTable("dbo.Subjects");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
-            DropTable("dbo.Messages");
+            DropTable("dbo.ForumPosts");
             DropTable("dbo.Categories");
             DropTable("dbo.Articles");
         }

@@ -33,10 +33,10 @@ namespace Polycore.Models
         {
         }
 
-        public DbSet<Categories> Categories { get; set; }
-        public DbSet<Subjects> Subjects { get; set; }
-        public DbSet<Articles> Articles { get; set; }
-        public DbSet<Messages> Messages { get; set; }
+        public DbSet<CategoryModels> Categories { get; set; }
+        public DbSet<SubjectModels> Subjects { get; set; }
+        public DbSet<ArticleModels> Articles { get; set; }
+        public DbSet<PostModels> ForumPosts { get; set; }
         
         public static ApplicationDbContext Create()
         {

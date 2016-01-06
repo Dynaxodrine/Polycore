@@ -61,36 +61,36 @@ namespace Polycore.Migrations
             manager.AddToRole(hugo.Id, "Member");
 
             context.Categories.AddOrUpdate(p => p.Game,
-                 new Categories { Console = "PC", Game = "Starcraft 2 legacy of the void", SubjectId = 1 },
-                 new Categories { Console = "PC", Game = "Starcraft 2 legacy of the void", SubjectId = 2 },
-                 new Categories { Console = "PC", Game = "Starcraft 2 legacy of the void", SubjectId = 3 },
-                 new Categories { Console = "PC", Game = "Starcraft 2 legacy of the void", SubjectId = 4 },
-                 new Categories { Console = "PC", Game = "Starcraft 2 legacy of the void", SubjectId = 5 },
-                 new Categories { Console = "PC", Game = "Starcraft 2 legacy of the void", SubjectId = 6 },
-                 new Categories { Console = "PC", Game = "Starcraft 2 legacy of the void", SubjectId = 7 },
-                 new Categories { Console = "PC", Game = "Starcraft 2 legacy of the void", SubjectId = 8 },
-                 new Categories { Console = "PC", Game = "Starcraft 2 legacy of the void", SubjectId = 9 },
+                 new CategoryModels { Console = "PC", Game = "Starcraft 2 legacy of the void", SubjectId = 1 },
+                 new CategoryModels { Console = "PC", Game = "Starcraft 2 legacy of the void", SubjectId = 2 },
+                 new CategoryModels { Console = "PC", Game = "Starcraft 2 legacy of the void", SubjectId = 3 },
+                 new CategoryModels { Console = "PC", Game = "Starcraft 2 legacy of the void", SubjectId = 4 },
+                 new CategoryModels { Console = "PC", Game = "Starcraft 2 legacy of the void", SubjectId = 5 },
+                 new CategoryModels { Console = "PC", Game = "Starcraft 2 legacy of the void", SubjectId = 6 },
+                 new CategoryModels { Console = "PC", Game = "Starcraft 2 legacy of the void", SubjectId = 7 },
+                 new CategoryModels { Console = "PC", Game = "Starcraft 2 legacy of the void", SubjectId = 8 },
+                 new CategoryModels { Console = "PC", Game = "Starcraft 2 legacy of the void", SubjectId = 9 },
 
-                 new Categories { Console = "XBOX", Game = "Halo 5", SubjectId = 1 },
-                 new Categories { Console = "XBOX", Game = "Halo 5", SubjectId = 2 },
-                 new Categories { Console = "XBOX", Game = "Halo 5", SubjectId = 3 },
-                 new Categories { Console = "XBOX", Game = "Halo 5", SubjectId = 4 },
-                 new Categories { Console = "XBOX", Game = "Halo 5", SubjectId = 5 },
-                 new Categories { Console = "XBOX", Game = "Halo 5", SubjectId = 6 },
-                 new Categories { Console = "XBOX", Game = "Halo 5", SubjectId = 7 },
-                 new Categories { Console = "XBOX", Game = "Halo 5", SubjectId = 8 },
-                 new Categories { Console = "XBOX", Game = "Halo 5", SubjectId = 9 });
+                 new CategoryModels { Console = "XBOX", Game = "Halo 5", SubjectId = 1 },
+                 new CategoryModels { Console = "XBOX", Game = "Halo 5", SubjectId = 2 },
+                 new CategoryModels { Console = "XBOX", Game = "Halo 5", SubjectId = 3 },
+                 new CategoryModels { Console = "XBOX", Game = "Halo 5", SubjectId = 4 },
+                 new CategoryModels { Console = "XBOX", Game = "Halo 5", SubjectId = 5 },
+                 new CategoryModels { Console = "XBOX", Game = "Halo 5", SubjectId = 6 },
+                 new CategoryModels { Console = "XBOX", Game = "Halo 5", SubjectId = 7 },
+                 new CategoryModels { Console = "XBOX", Game = "Halo 5", SubjectId = 8 },
+                 new CategoryModels { Console = "XBOX", Game = "Halo 5", SubjectId = 9 });
 
             context.Subjects.AddOrUpdate(p => p.Title,
-                 new Subjects { Title = "Let's plays" },
-                 new Subjects { Title = "Guides" },
-                 new Subjects { Title = "Cheats" },
-                 new Subjects { Title = "General discussion" },
-                 new Subjects { Title = "Help" },
-                 new Subjects { Title = "Mods" },
-                 new Subjects { Title = "Request" },
-                 new Subjects { Title = "Review" },
-                 new Subjects { Title = "Development" });
+                 new SubjectModels { Title = "Let's plays" },
+                 new SubjectModels { Title = "Guides" },
+                 new SubjectModels { Title = "Cheats" },
+                 new SubjectModels { Title = "General discussion" },
+                 new SubjectModels { Title = "Help" },
+                 new SubjectModels { Title = "Mods" },
+                 new SubjectModels { Title = "Request" },
+                 new SubjectModels { Title = "Review" },
+                 new SubjectModels { Title = "Development" });
         }
     }
 }
