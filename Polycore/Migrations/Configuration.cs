@@ -47,17 +47,49 @@ namespace Polycore.Migrations
             };
             var user2 = new ApplicationUser
             {
-                UserName = "testtest",
-                Email = "test@gmail.com",
+                UserName = "Hugo",
+                Email = "hugo@gmail.com",
                 EmailConfirmed = true
             };
-                
+
             manager.Create(user1, "123456");
             manager.AddToRole(user1.Id, "Administrator");
             manager.AddToRole(user1.Id, "Member");
 
             manager.Create(user2, "123456");
-            manager.AddToRole(user2.Id, "Member");            
+            manager.AddToRole(user2.Id, "Member");
+
+            context.Categories.AddOrUpdate(p => p.Game,
+                 new Categories { Console = "PC", Game = "Starcraft 2 legacy of the void", SubjectId = 1 },
+                 new Categories { Console = "PC", Game = "Starcraft 2 legacy of the void", SubjectId = 2 },
+                 new Categories { Console = "PC", Game = "Starcraft 2 legacy of the void", SubjectId = 3 },
+                 new Categories { Console = "PC", Game = "Starcraft 2 legacy of the void", SubjectId = 4 },
+                 new Categories { Console = "PC", Game = "Starcraft 2 legacy of the void", SubjectId = 5 },
+                 new Categories { Console = "PC", Game = "Starcraft 2 legacy of the void", SubjectId = 6 },
+                 new Categories { Console = "PC", Game = "Starcraft 2 legacy of the void", SubjectId = 7 },
+                 new Categories { Console = "PC", Game = "Starcraft 2 legacy of the void", SubjectId = 8 },
+                 new Categories { Console = "PC", Game = "Starcraft 2 legacy of the void", SubjectId = 9 },
+
+                 new Categories { Console = "XBOX", Game = "Halo 5", SubjectId = 1 },
+                 new Categories { Console = "XBOX", Game = "Halo 5", SubjectId = 2 },
+                 new Categories { Console = "XBOX", Game = "Halo 5", SubjectId = 3 },
+                 new Categories { Console = "XBOX", Game = "Halo 5", SubjectId = 4 },
+                 new Categories { Console = "XBOX", Game = "Halo 5", SubjectId = 5 },
+                 new Categories { Console = "XBOX", Game = "Halo 5", SubjectId = 6 },
+                 new Categories { Console = "XBOX", Game = "Halo 5", SubjectId = 7 },
+                 new Categories { Console = "XBOX", Game = "Halo 5", SubjectId = 8 },
+                 new Categories { Console = "XBOX", Game = "Halo 5", SubjectId = 9 });
+
+            context.Subjects.AddOrUpdate(p => p.Title,
+                 new Subjects { Title = "Let's plays" },
+                 new Subjects { Title = "Guides" },
+                 new Subjects { Title = "Cheats" },
+                 new Subjects { Title = "General discussion" },
+                 new Subjects { Title = "Help" },
+                 new Subjects { Title = "Mods" },
+                 new Subjects { Title = "Request" },
+                 new Subjects { Title = "Review" },
+                 new Subjects { Title = "Development" });
         }
     }
 }

@@ -22,5 +22,10 @@ namespace Polycore.Controllers
         {
             return View();
         }
+
+        public ActionResult Forum()
+        {
+            return View();
+        }
     }
 }

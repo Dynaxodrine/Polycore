@@ -173,9 +173,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201511301033017_Age.cs" />
-    <Compile Include="Migrations\201511301033017_Age.Designer.cs">
-      <DependentUpon>201511301033017_Age.cs</DependentUpon>
+    <Compile Include="Migrations\201601061309546_InitialCreate.cs" />
+    <Compile Include="Migrations\201601061309546_InitialCreate.Designer.cs">
+      <DependentUpon>201601061309546_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -344,7 +344,9 @@
     <Content Include="Scripts\transit.js" />
     <Content Include="Scripts\woocommerce.min.js" />
     <Content Include="Scripts\wp-wall.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -402,10 +404,11 @@
     <Content Include="Views\Manage\DetailsUsers.cshtml" />
     <Content Include="Views\Manage\AddRoleToUser.cshtml" />
     <Content Include="Views\Shared\_Error.cshtml" />
+    <Content Include="Views\Home\Forum.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201511301033017_Age.resx">
-      <DependentUpon>201511301033017_Age.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601061309546_InitialCreate.resx">
+      <DependentUpon>201601061309546_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

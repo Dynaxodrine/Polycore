@@ -25,6 +25,47 @@ namespace Polycore.Models
         }
     }
 
+    public class Categories
+    {
+        [Key]
+        public int CategoryId { get; set; }
+        [Required(ErrorMessage = "Console is required.")]
+        public string Console { get; set; }
+        [Required(ErrorMessage = "Game is required.")]
+        public string Game { get; set; }
+        [Required(ErrorMessage = "Subject is required.")]
+        public int SubjectId { get; set; }
+    }
+
+    public class Subjects
+    {
+        [Key]
+        public int SubjectId { get; set; }
+        [Required(ErrorMessage = "Title is required.")]
+        public string Title { get; set; }
+    }
+
+    public class Articles
+    {
+        [Key]
+        public int ArticleId { get; set; }
+        [Required(ErrorMessage = "Category is required.")]
+        public int CategoryId { get; set; }
+        [Required(ErrorMessage = "Title is required.")]
+        public string Title { get; set; }        
+        public string Content { get; set; }
+    }
+    
+    public class Messages
+    {
+        [Key]
+        public float MessageId { get; set; }
+        public string UserId { get; set; }
+        public int ArticleId { get; set; }
+        [Required(ErrorMessage = "Message is required.")]           
+        public string Message { get; set; } 
+    }
+
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
@@ -32,6 +73,11 @@ namespace Polycore.Models
         {
         }
 
+        public DbSet<Categories> Categories { get; set; }
+        public DbSet<Subjects> Subjects { get; set; }
+        public DbSet<Articles> Articles { get; set; }
+        public DbSet<Messages> Messages { get; set; }
+                
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

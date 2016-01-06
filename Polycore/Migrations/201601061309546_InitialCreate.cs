@@ -3,10 +3,43 @@ namespace Polycore.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Age : DbMigration
+    public partial class InitialCreate : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.Articles",
+                c => new
+                    {
+                        ArticleId = c.Int(nullable: false, identity: true),
+                        CategoryId = c.Int(nullable: false),
+                        Title = c.String(nullable: false),
+                        Content = c.String(),
+                    })
+                .PrimaryKey(t => t.ArticleId);
+            
+            CreateTable(
+                "dbo.Categories",
+                c => new
+                    {
+                        CategoryId = c.Int(nullable: false, identity: true),
+                        Console = c.String(nullable: false),
+                        Game = c.String(nullable: false),
+                        SubjectId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.CategoryId);
+            
+            CreateTable(
+                "dbo.Messages",
+                c => new
+                    {
+                        MessageId = c.Single(nullable: false),
+                        UserId = c.String(),
+                        ArticleId = c.Int(nullable: false),
+                        Message = c.String(nullable: false),
+                    })
+                .PrimaryKey(t => t.MessageId);
+            
             CreateTable(
                 "dbo.AspNetRoles",
                 c => new
@@ -29,6 +62,15 @@ namespace Polycore.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId)
                 .Index(t => t.RoleId);
+            
+            CreateTable(
+                "dbo.Subjects",
+                c => new
+                    {
+                        SubjectId = c.Int(nullable: false, identity: true),
+                        Title = c.String(nullable: false),
+                    })
+                .PrimaryKey(t => t.SubjectId);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -93,8 +135,12 @@ namespace Polycore.Migrations
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
+            DropTable("dbo.Subjects");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.Messages");
+            DropTable("dbo.Categories");
+            DropTable("dbo.Articles");
         }
     }
 }
