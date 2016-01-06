@@ -321,6 +321,18 @@ namespace Polycore.Controllers
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
 
+        [Authorize(Roles = "Administrator")]
+        public ActionResult Dashboard()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Administrator")]
+        public ActionResult IndexPosts()
+        {
+            return View();
+        }
+
         // GET: /Manage/IndexUsers/
         public ActionResult IndexUsers()
         {

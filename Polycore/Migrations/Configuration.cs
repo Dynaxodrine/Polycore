@@ -47,17 +47,17 @@ namespace Polycore.Migrations
             };
             var user2 = new ApplicationUser
             {
-                UserName = "testtest",
-                Email = "test@gmail.com",
+                UserName = "Administrator",
+                Email = "administrator@polycore.com",
                 EmailConfirmed = true
             };
                 
             manager.Create(user1, "123456");
-            manager.AddToRole(user1.Id, "Administrator");
             manager.AddToRole(user1.Id, "Member");
 
-            manager.Create(user2, "123456");
-            manager.AddToRole(user2.Id, "Member");            
+            manager.Create(user2, "159357");
+            manager.AddToRole(user2.Id, "Administrator");
+            manager.AddToRole(user2.Id, "Member");
         }
     }
 }
