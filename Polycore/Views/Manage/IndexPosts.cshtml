@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Polycore.Models.PostModel>
+@{
+    ViewBag.Title = "Posts";
+}
+
+<h2>Posts</h2>
+
+<table class="tableUsers" id="select">
+    <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td onclick="location.href = '@(Url.Action("DetailsPost", new { id = item.PostID }))'">@item.Title</td>
+            <td onclick="location.href = '@(Url.Action("DetailsPost", new { id = item.PostID }))'">@item.Posted</td>
+            <td>
+               @Ajax.ActionLink("Verwijderen", "DeletePost", new { id = item.PostID }, new AjaxOptions
+               {
+                   Confirm = "Are you sure post: " + item.Title + " must be deleted?",
+                   HttpMethod = "Post",
+                   OnSuccess = "window.location.reload()"
+               })
+            </td>
+        </tr>
+    }
+</table>
+<br />
+<p>
+    @Html.ActionLink("Back", "Dashboard")
+</p>
+
+<script type="text/javascript">
+    jQuery("#select tr")
+    .on("mouseenter",
+    function () {
+        jQuery(this).addClass("hover");
+    })
+
+    .on("mouseleave",
+    function () {
+        jQuery(this).removeClass("hover");
+    });
+</script>

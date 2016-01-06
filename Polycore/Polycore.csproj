@@ -173,14 +173,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601061309546_InitialCreate.cs" />
-    <Compile Include="Migrations\201601061309546_InitialCreate.Designer.cs">
-      <DependentUpon>201601061309546_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201601061854178_InitialCreate.cs" />
+    <Compile Include="Migrations\201601061854178_InitialCreate.Designer.cs">
+      <DependentUpon>201601061854178_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Articles.cs" />
+    <Compile Include="Models\Categories.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Messages.cs" />
+    <Compile Include="Models\Subjects.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -344,9 +348,7 @@
     <Content Include="Scripts\transit.js" />
     <Content Include="Scripts\woocommerce.min.js" />
     <Content Include="Scripts\wp-wall.js" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -403,12 +405,12 @@
     <Content Include="Views\Manage\IndexUsers.cshtml" />
     <Content Include="Views\Manage\DetailsUsers.cshtml" />
     <Content Include="Views\Manage\AddRoleToUser.cshtml" />
-    <Content Include="Views\Shared\_Error.cshtml" />
-    <Content Include="Views\Home\Forum.cshtml" />
+    <Content Include="Views\Manage\Dashboard.cshtml" />
+    <Content Include="Views\Manage\IndexPosts.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201601061309546_InitialCreate.resx">
-      <DependentUpon>201601061309546_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601061854178_InitialCreate.resx">
+      <DependentUpon>201601061854178_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

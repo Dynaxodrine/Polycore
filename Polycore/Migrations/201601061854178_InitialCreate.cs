@@ -34,9 +34,11 @@ namespace Polycore.Migrations
                 c => new
                     {
                         MessageId = c.Single(nullable: false),
-                        UserId = c.String(),
                         ArticleId = c.Int(nullable: false),
-                        Message = c.String(nullable: false),
+                        UserName = c.String(),
+                        Title = c.String(nullable: false),
+                        Content = c.String(nullable: false),
+                        Posted = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.MessageId);
             

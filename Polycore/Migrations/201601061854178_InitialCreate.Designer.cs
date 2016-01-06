@@ -13,7 +13,7 @@ namespace Polycore.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201601061309546_InitialCreate"; }
+            get { return "201601061854178_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

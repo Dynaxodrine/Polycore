@@ -39,25 +39,26 @@ namespace Polycore.Migrations
 
             var store = new UserStore<ApplicationUser>(context);
             var manager = new UserManager<ApplicationUser>(store);
-            var user1 = new ApplicationUser
+            var jeffrey = new ApplicationUser
             {
                 UserName = "JeffreyZwirs",
                 Email = "jeffreyzwirs@gmail.com",
                 EmailConfirmed = true
             };
-            var user2 = new ApplicationUser
+            var hugo = new ApplicationUser
             {
-                UserName = "Hugo",
-                Email = "hugo@gmail.com",
+                UserName = "Administrator",
+                Email = "administrator@polycore.com",
                 EmailConfirmed = true
             };
 
-            manager.Create(user1, "123456");
-            manager.AddToRole(user1.Id, "Administrator");
-            manager.AddToRole(user1.Id, "Member");
+            manager.Create(jeffrey, "123456");
+            manager.AddToRole(jeffrey.Id, "Administrator");
+            manager.AddToRole(jeffrey.Id, "Member");
 
-            manager.Create(user2, "123456");
-            manager.AddToRole(user2.Id, "Member");
+            manager.Create(hugo, "123456");
+            manager.AddToRole(hugo.Id, "Administrator");
+            manager.AddToRole(hugo.Id, "Member");
 
             context.Categories.AddOrUpdate(p => p.Game,
                  new Categories { Console = "PC", Game = "Starcraft 2 legacy of the void", SubjectId = 1 },
