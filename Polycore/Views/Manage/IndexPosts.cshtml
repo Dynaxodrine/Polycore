@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Polycore.Models.PostModel>
+﻿@model IEnumerable<Polycore.Models.PostModels>
 @{
     ViewBag.Title = "Posts";
 }
@@ -7,18 +7,18 @@
 
 <table class="tableUsers" id="select">
     <tr>
-        <th>Username</th>
-        <th>Email</th>
+        <th>Title</th>
+        <th>Posted</th>
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
-            <td onclick="location.href = '@(Url.Action("DetailsPost", new { id = item.PostID }))'">@item.Title</td>
-            <td onclick="location.href = '@(Url.Action("DetailsPost", new { id = item.PostID }))'">@item.Posted</td>
+            <td onclick="location.href = '@(Url.Action("DetailsPost", new { id = item.ForumPostId}))'">@item.Title</td>
+            <td onclick="location.href = '@(Url.Action("DetailsPost", new { id = item.ForumPostId }))'">@item.Posted</td>
             <td>
-               @Ajax.ActionLink("Verwijderen", "DeletePost", new { id = item.PostID }, new AjaxOptions
+               @Ajax.ActionLink("Verwijderen", "DeletePost", new { id = item.ForumPostId }, new AjaxOptions
                {
                    Confirm = "Are you sure post: " + item.Title + " must be deleted?",
                    HttpMethod = "Post",
@@ -33,15 +33,8 @@
     @Html.ActionLink("Back", "Dashboard")
 </p>
 
-<script type="text/javascript">
-    jQuery("#select tr")
-    .on("mouseenter",
-    function () {
-        jQuery(this).addClass("hover");
-    })
-
-    .on("mouseleave",
-    function () {
-        jQuery(this).removeClass("hover");
-    });
-</script>
+@section Scripts {
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+    @Scripts.Render("~/Scripts/jquery.js")
+    @Scripts.Render("~/Scripts/SelectBar.js")
+}

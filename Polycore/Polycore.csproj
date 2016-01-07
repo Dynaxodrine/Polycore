@@ -173,9 +173,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601062037221_InitialCreate.cs" />
-    <Compile Include="Migrations\201601062037221_InitialCreate.Designer.cs">
-      <DependentUpon>201601062037221_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201601070852032_InitialCreate.cs" />
+    <Compile Include="Migrations\201601070852032_InitialCreate.Designer.cs">
+      <DependentUpon>201601070852032_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -340,6 +340,7 @@
     <Content Include="Scripts\parallax.js" />
     <Content Include="Scripts\pb-view.js" />
     <Content Include="Scripts\priceslider.js" />
+    <Content Include="Scripts\SelectBar.js" />
     <Content Include="Scripts\simple-slider.js" />
     <Content Include="Scripts\tabs.js" />
     <Content Include="Scripts\theme.min.js" />
@@ -407,10 +408,11 @@
     <Content Include="Views\Manage\AddRoleToUser.cshtml" />
     <Content Include="Views\Manage\Dashboard.cshtml" />
     <Content Include="Views\Manage\IndexPosts.cshtml" />
+    <Content Include="Views\Home\Forum.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201601062037221_InitialCreate.resx">
-      <DependentUpon>201601062037221_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601070852032_InitialCreate.resx">
+      <DependentUpon>201601070852032_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

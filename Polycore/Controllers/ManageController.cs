@@ -327,10 +327,12 @@ namespace Polycore.Controllers
             return View();
         }
 
+        private readonly ApplicationDbContext db = new ApplicationDbContext();
+        
         [Authorize(Roles = "Administrator")]
         public ActionResult IndexPosts()
-        {
-            return View();
+        {            
+            return View(db.ForumPosts.ToList());
         }
 
         // GET: /Manage/IndexUsers/

@@ -11,8 +11,10 @@ namespace Polycore.Models
     public class PostModels
     {
         [Key]
-        public float MessageId { get; set; }
+        public float ForumPostId { get; set; }
+        [Required]
         public int ArticleId { get; set; }
+        [Required]
         public string UserName { get; set; }       
         [Required(ErrorMessage = "Title is required.")]
         public string Title { get; set; }

@@ -14,7 +14,7 @@ namespace Polycore.Migrations
                         ArticleId = c.Int(nullable: false, identity: true),
                         CategoryId = c.Int(nullable: false),
                         Title = c.String(nullable: false),
-                        Content = c.String(),
+                        Content = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.ArticleId);
             
@@ -33,14 +33,14 @@ namespace Polycore.Migrations
                 "dbo.ForumPosts",
                 c => new
                     {
-                        MessageId = c.Single(nullable: false),
+                        ForumPostId = c.Single(nullable: false),
                         ArticleId = c.Int(nullable: false),
-                        UserName = c.String(),
+                        UserName = c.String(nullable: false),
                         Title = c.String(nullable: false),
                         Content = c.String(nullable: false),
                         Posted = c.DateTime(nullable: false),
                     })
-                .PrimaryKey(t => t.MessageId);
+                .PrimaryKey(t => t.ForumPostId);
             
             CreateTable(
                 "dbo.AspNetRoles",
