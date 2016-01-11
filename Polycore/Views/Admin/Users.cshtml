@@ -21,8 +21,8 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td onclick="location.href = '@(Url.Action("DetailsUsers", new { id = item.Id }))'">@item.UserName</td>
-            <td onclick="location.href = '@(Url.Action("DetailsUsers", new { id = item.Id }))'">@item.Email</td>
+            <td onclick="location.href = '@(Url.Action("User", new { id = item.Id }))'">@item.UserName</td>
+            <td onclick="location.href = '@(Url.Action("User", new { id = item.Id }))'">@item.Email</td>
             <td>
                 @if (item.UserName != User.Identity.Name)
                 {

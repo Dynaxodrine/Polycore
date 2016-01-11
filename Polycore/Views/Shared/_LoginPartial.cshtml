@@ -9,12 +9,15 @@
                 @if (Request.IsAuthenticated) // If the user is logged in correctly.
                 {
                     <li>
-                        <span>Hello @User.Identity.GetUserName()!</span>
+                        <a href="@Url.Action("Index", "Profile")">@User.Identity.GetUserName()</a>
                     </li>
-                    <li>
-                        <a href="@Url.Action("Index", "Manage")">Manage</a>
+                    if (User.IsInRole("Administrator"))
+                    {
+                         <li>
+                             <a href="@Url.Action("Dashboard", "Admin")">Admin Dashboard</a>
 
-                    </li>
+                         </li>
+                    }
                     <li>@*This executes the form below. Didn't put it here because of styling issues*@
                         <a href="#" onclick="document.getElementById('logoutForm').submit()">Log off</a>
                     </li>

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Polycore.Models.PostModels>
+﻿@model IEnumerable<Polycore.Models.NewsArticleModel>
 @{
     ViewBag.Title = "Posts";
 }
@@ -15,7 +15,7 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td onclick="location.href = '@(Url.Action("DetailsPost", new { id = item.ForumPostId}))'">@item.Title</td>
+            @*@<td onclick="location.href = '@(Url.Action("DetailsPost", new { id = item.ForumPostId}))'">@item.Title</td>
             <td onclick="location.href = '@(Url.Action("DetailsPost", new { id = item.ForumPostId }))'">@item.Posted</td>
             <td>
                @Ajax.ActionLink("Verwijderen", "DeletePost", new { id = item.ForumPostId }, new AjaxOptions
@@ -24,7 +24,7 @@
                    HttpMethod = "Post",
                    OnSuccess = "window.location.reload()"
                })
-            </td>
+            </td>*@
         </tr>
     }
 </table>

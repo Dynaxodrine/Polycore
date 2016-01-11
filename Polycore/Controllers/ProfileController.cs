@@ -12,16 +12,19 @@ using Microsoft.AspNet.Identity.EntityFramework;
 namespace Polycore.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ProfileController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public ManageController()
+
+        private readonly ApplicationDbContext db = new ApplicationDbContext();
+
+        public ProfileController()
         {
         }
 
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public ProfileController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -143,7 +146,7 @@ namespace Polycore.Controllers
             {
                 await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
             }
-            return RedirectToAction("Index", "Manage");
+            return RedirectToAction("Index", "Profile");
         }
 
         //
@@ -158,7 +161,7 @@ namespace Polycore.Controllers
             {
                 await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
             }
-            return RedirectToAction("Index", "Manage");
+            return RedirectToAction("Index", "Profile");
         }
 
         //
@@ -305,7 +308,7 @@ namespace Polycore.Controllers
         public ActionResult LinkLogin(string provider)
         {
             // Request a redirect to the external login provider to link a login for the current user
-            return new AccountController.ChallengeResult(provider, Url.Action("LinkLoginCallback", "Manage"), User.Identity.GetUserId());
+            return new AccountController.ChallengeResult(provider, Url.Action("LinkLoginCallback", "Profile"), User.Identity.GetUserId());
         }
 
         //
@@ -319,121 +322,6 @@ namespace Polycore.Controllers
             }
             var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
-        }
-
-        [Authorize(Roles = "Administrator")]
-        public ActionResult Dashboard()
-        {
-            return View();
-        }
-
-        private readonly ApplicationDbContext db = new ApplicationDbContext();
-        
-        [Authorize(Roles = "Administrator")]
-        public ActionResult IndexPosts()
-        {            
-            return View(db.ForumPosts.ToList());
-        }
-
-        // GET: /Manage/IndexUsers/
-        public ActionResult IndexUsers()
-        {
-            if (User.IsInRole("Administrator"))
-            {
-                return View(UserManager.Users.ToList());
-            }
-            return View();
-        }
-
-        // POST: Manage/DeleteUser/1
-        [HttpPost]
-        public ActionResult DeleteUser(string id)
-        {
-            var account = UserManager.FindById(id);
-
-            // Remove user.
-            UserManager.Delete(account);
-
-            return RedirectToAction("IndexUsers");
-        }
-
-        // GET: /Manage/DetailsUsers/1  
-        public ActionResult DetailsUsers(string id)
-        {
-            if (User.IsInRole("Administrator"))
-            {
-                var account = UserManager.FindById(id);
-
-                var userroles = UserManager.GetRoles(id);
-                var roles = new UserRoleViewModel
-                {
-                    UserId = account.Id,
-                    UserName = account.UserName,
-                    RoleList = userroles.ToList()
-                };
-
-                return View(roles);
-            }
-            return View();
-        }
-
-        // GET: /Manage/AddRoleToUser/1  
-        public ActionResult AddRoleToUser(ApplicationDbContext model, string id)
-        {
-            if (User.IsInRole("Administrator"))
-            {
-                var account = UserManager.FindById(id);
-
-                var roles = new AddUserRoleViewModel
-                {
-                    UserId = account.Id,
-                    UserName = account.UserName,
-                    RoleList = model.Roles,
-                };
-
-                return View(roles);
-            }
-            return View();
-        }
-
-        // POST: Manage/AddRoleToUser/1
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AddRoleToUser(ApplicationDbContext model, string rolename, string id)
-        {
-            var account = UserManager.FindById(id);
-
-            if (rolename != "")
-            {
-                // Add role to user.
-                UserManager.AddToRole(account.Id, rolename);
-
-                return RedirectToAction("DetailsUsers", new { id = account.Id });
-            }
-
-            ModelState.AddModelError("", "You did not select a role.");
-
-            var roles = new AddUserRoleViewModel
-            {
-                UserId = account.Id,
-                UserName = account.UserName,
-                RoleList = model.Roles,
-            };
-
-            ViewBag.Controller = "AddRoleToUser";
-            return View(roles);
-        }
-
-        // POST: Manage/DeleteRoleFromUser/1
-        [HttpPost]
-        public ActionResult DeleteRoleFromUser(string id, string rolename)
-        {
-            var account = UserManager.FindById(id);
-
-            // Remove role from user.
-            UserManager.RemoveFromRole(account.Id, rolename);
-
-            return RedirectToAction("DetailsUsers", new { id = account.Id });
         }
 
         protected override void Dispose(bool disposing)

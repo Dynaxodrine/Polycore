@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.Data.Entity;
@@ -15,6 +16,13 @@ namespace Polycore.Models
     {
         [Range(0, 122)]
         public int? Age { get; set; }
+        public string ProfilePicture { get; set; }
+        public string AboutMe { get; set; }
+        public Types.Gender Gender { get; set; }
+
+        public virtual List<PostModel> Posts { get; set; }
+        public virtual List<CommentModel> Comments { get; set; }
+        public virtual List<NewsArticleModel> NewsArticles { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -32,11 +40,13 @@ namespace Polycore.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
-
-        public DbSet<CategoryModels> Categories { get; set; }
-        public DbSet<SubjectModels> Subjects { get; set; }
-        public DbSet<ArticleModels> Articles { get; set; }
-        public DbSet<PostModels> ForumPosts { get; set; }
+        
+        public DbSet<SubjectModel> Subjects { get; set; }
+        public DbSet<GameModel> Games { get; set; }
+        public DbSet<ConsoleModel> Consoles { get; set; }
+        public DbSet<CommentModel> Comments { get; set; }
+        public DbSet<PostModel> Posts { get; set; }
+        public DbSet<NewsArticleModel> NewsArticles { get; set; }
         
         public static ApplicationDbContext Create()
         {

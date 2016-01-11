@@ -7,16 +7,16 @@ using System.Web;
 
 namespace Polycore.Models
 {
-    [Table("Articles")]
-    public class ArticleModels
+    [Table("NewsArticles")]
+    public class NewsArticleModel
     {
         [Key]
-        public int ArticleId { get; set; }
-        [Required(ErrorMessage = "Category is required.")]
-        public int CategoryId { get; set; }
-        [Required(ErrorMessage = "Title is required.")]
+        public int NewsArticleID { get; set; }
         public string Title { get; set; }
-        [Required(ErrorMessage = "Content is required.")]
         public string Content { get; set; }
+        public DateTime Published { get; set; }
+
+        public virtual ApplicationUser User { get; set; }
+        public virtual List<CommentModel> Comments { get; set; }
     }
 }

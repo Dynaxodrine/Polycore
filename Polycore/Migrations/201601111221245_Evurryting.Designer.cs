@@ -7,13 +7,13 @@ namespace Polycore.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class InitialCreate : IMigrationMetadata
+    public sealed partial class Evurryting : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Evurryting));
         
         string IMigrationMetadata.Id
         {
-            get { return "201601070852032_InitialCreate"; }
+            get { return "201601111221245_Evurryting"; }
         }
         
         string IMigrationMetadata.Source
