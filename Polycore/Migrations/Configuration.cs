@@ -6,6 +6,7 @@ namespace Polycore.Migrations
 {
     using Microsoft.AspNet.Identity;
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
@@ -45,7 +46,7 @@ namespace Polycore.Migrations
                 Email = "jeffreyzwirs@gmail.com",
                 EmailConfirmed = true
             };
-            var administrator = new ApplicationUser
+            var hugo = new ApplicationUser
             {
                 UserName = "Administrator",
                 Email = "administrator@polycore.com",
@@ -56,10 +57,36 @@ namespace Polycore.Migrations
             manager.AddToRole(jeffrey.Id, "Administrator");
             manager.AddToRole(jeffrey.Id, "Member");
 
-            manager.Create(administrator, "159357");
-            manager.AddToRole(administrator.Id, "Administrator");
-            manager.AddToRole(administrator.Id, "Member");
-            
+            manager.Create(hugo, "123456");
+            manager.AddToRole(hugo.Id, "Administrator");
+            manager.AddToRole(hugo.Id, "Member");
+
+            //var consoles = new List<ConsoleModel>{
+            //    new ConsoleModel { Name = "PC" },
+            //    new ConsoleModel { Name = "Xbox One" },
+            //    new ConsoleModel { Name = "Playstation 4" }
+            //};
+
+            //consoles.ForEach(c => context.Consoles.AddOrUpdate(m => m.Name, c));
+            //context.SaveChanges();
+
+            //var games = new List<GameModel>{
+            //    new GameModel { Name = "Starcraft 2 legacy of the void" },
+            //    new GameModel { Name = "Halo 5" },
+            //    new GameModel { Name = "Mass effect Adromeda" }
+            //};
+
+            //games.ForEach(c => context.Games.AddOrUpdate(m => m.Name, c));
+            //context.SaveChanges();
+
+            //var subjects = new List<SubjectModel>{
+            //    new SubjectModel { Name = "test1" },
+            //    new SubjectModel { Name = "test2" },
+            //    new SubjectModel { Name = "test3" }
+            //};
+
+            //subjects.ForEach(c => context.Subjects.AddOrUpdate(m => m.Name, c));
+            //context.SaveChanges();
         }
     }
 }

@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Polycore.Models.PostModel>
+
+@{
+    ViewBag.Title = "Titles";
+}
+
+<h2>Titles</h2>
+
+@foreach(var item in Model)
+{
+    <div> - @Html.ActionLink(item.Title, "Forum", new { id = item.PostID })</div>
+}

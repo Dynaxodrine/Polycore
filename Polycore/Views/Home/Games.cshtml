@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Polycore.Models.GameModel>
+
+@{
+    ViewBag.Title = "Games";
+}
+
+<h2>Games</h2>
+
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        <div> - @Html.ActionLink(item.Name, "Subjects", new { id = item.GameID })</div>
+    }
+}

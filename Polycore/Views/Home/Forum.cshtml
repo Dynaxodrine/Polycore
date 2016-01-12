@@ -1,7 +1,31 @@
-﻿@model Polycore.Models.CategoryModels
+﻿@model Polycore.Models.PostModel
+
 @{
     ViewBag.Title = "Forum";
 }
 
-<h2>Forum</h2>
+<h2>@Model.Title</h2>
 
+<div>
+    @Model.Content
+</div>
+<br />
+<div>
+    Likes: @Model.Likes <br />
+    DisLikes: @Model.Dislikes<br />
+    Posted: @Model.Posted<br />
+    PostedBy: @Model.User.UserName<br />    
+</div>
+
+<h2>Comments</h2>
+
+<div>
+    @foreach (var item in Model.Comments)
+    {
+        @item.Likes
+        @item.Dislikes
+        <textarea>@item.Content</textarea>
+        @item.Commented
+        <br />
+    }
+</div>

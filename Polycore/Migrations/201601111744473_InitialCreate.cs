@@ -1,17 +1,12 @@
-
 namespace Polycore.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Evurryting : DbMigration
+    public partial class InitialCreate : DbMigration
     {
         public override void Up()
         {
-            DropTable("dbo.Articles");
-            DropTable("dbo.Categories");
-            DropTable("dbo.ForumPosts");
-            DropTable("dbo.Subjects");
             CreateTable(
                 "dbo.Comments",
                 c => new
@@ -96,6 +91,55 @@ namespace Polycore.Migrations
                 .PrimaryKey(t => t.ConsoleID);
             
             CreateTable(
+                "dbo.AspNetUsers",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Age = c.Int(),
+                        ProfilePicture = c.String(),
+                        AboutMe = c.String(),
+                        Gender = c.Int(nullable: false),
+                        Email = c.String(maxLength: 256),
+                        EmailConfirmed = c.Boolean(nullable: false),
+                        PasswordHash = c.String(),
+                        SecurityStamp = c.String(),
+                        PhoneNumber = c.String(),
+                        PhoneNumberConfirmed = c.Boolean(nullable: false),
+                        TwoFactorEnabled = c.Boolean(nullable: false),
+                        LockoutEndDateUtc = c.DateTime(),
+                        LockoutEnabled = c.Boolean(nullable: false),
+                        AccessFailedCount = c.Int(nullable: false),
+                        UserName = c.String(nullable: false, maxLength: 256),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.UserName, unique: true, name: "UserNameIndex");
+            
+            CreateTable(
+                "dbo.AspNetUserClaims",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        ClaimType = c.String(),
+                        ClaimValue = c.String(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId);
+            
+            CreateTable(
+                "dbo.AspNetUserLogins",
+                c => new
+                    {
+                        LoginProvider = c.String(nullable: false, maxLength: 128),
+                        ProviderKey = c.String(nullable: false, maxLength: 128),
+                        UserId = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId);
+            
+            CreateTable(
                 "dbo.NewsArticles",
                 c => new
                     {
@@ -109,68 +153,54 @@ namespace Polycore.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.User_Id)
                 .Index(t => t.User_Id);
             
-            AddColumn("dbo.AspNetUsers", "ProfilePicture", c => c.String());
-            AddColumn("dbo.AspNetUsers", "AboutMe", c => c.String());
-            AddColumn("dbo.AspNetUsers", "Gender", c => c.Int(nullable: false));
+            CreateTable(
+                "dbo.AspNetUserRoles",
+                c => new
+                    {
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        RoleId = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => new { t.UserId, t.RoleId })
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
+                .Index(t => t.UserId)
+                .Index(t => t.RoleId);
+            
+            CreateTable(
+                "dbo.AspNetRoles",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Name = c.String(nullable: false, maxLength: 256),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
+            
         }
         
         public override void Down()
         {
-            CreateTable(
-                "dbo.Subjects",
-                c => new
-                    {
-                        SubjectId = c.Int(nullable: false, identity: true),
-                        Title = c.String(nullable: false),
-                    })
-                .PrimaryKey(t => t.SubjectId);
-            
-            CreateTable(
-                "dbo.ForumPosts",
-                c => new
-                    {
-                        ForumPostId = c.Single(nullable: false),
-                        ArticleId = c.Int(nullable: false),
-                        UserName = c.String(nullable: false),
-                        Title = c.String(nullable: false),
-                        Content = c.String(nullable: false),
-                        Posted = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.ForumPostId);
-            
-            CreateTable(
-                "dbo.Categories",
-                c => new
-                    {
-                        CategoryId = c.Int(nullable: false, identity: true),
-                        Console = c.String(nullable: false),
-                        Game = c.String(nullable: false),
-                        SubjectId = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.CategoryId);
-            
-            CreateTable(
-                "dbo.Articles",
-                c => new
-                    {
-                        ArticleId = c.Int(nullable: false, identity: true),
-                        CategoryId = c.Int(nullable: false),
-                        Title = c.String(nullable: false),
-                        Content = c.String(nullable: false),
-                    })
-                .PrimaryKey(t => t.ArticleId);
-            
+            DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Posts", "User_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.NewsArticles", "User_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.Comments", "NewsArticleModel_NewsArticleID", "dbo.NewsArticles");
+            DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Comments", "User_Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Subjects", "SubjectParent_SubjectID", "dbo.Subjects");
             DropForeignKey("dbo.Posts", "Subject_SubjectID", "dbo.Subjects");
             DropForeignKey("dbo.Subjects", "Game_GameID", "dbo.Games");
             DropForeignKey("dbo.Games", "Console_ConsoleID", "dbo.Consoles");
             DropForeignKey("dbo.Comments", "Post_PostID", "dbo.Posts");
             DropForeignKey("dbo.Comments", "CommentParent_CommentID", "dbo.Comments");
+            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
+            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.NewsArticles", new[] { "User_Id" });
+            DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
+            DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
+            DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.Games", new[] { "Console_ConsoleID" });
             DropIndex("dbo.Subjects", new[] { "SubjectParent_SubjectID" });
             DropIndex("dbo.Subjects", new[] { "Game_GameID" });
@@ -180,10 +210,12 @@ namespace Polycore.Migrations
             DropIndex("dbo.Comments", new[] { "User_Id" });
             DropIndex("dbo.Comments", new[] { "Post_PostID" });
             DropIndex("dbo.Comments", new[] { "CommentParent_CommentID" });
-            DropColumn("dbo.AspNetUsers", "Gender");
-            DropColumn("dbo.AspNetUsers", "AboutMe");
-            DropColumn("dbo.AspNetUsers", "ProfilePicture");
+            DropTable("dbo.AspNetRoles");
+            DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.NewsArticles");
+            DropTable("dbo.AspNetUserLogins");
+            DropTable("dbo.AspNetUserClaims");
+            DropTable("dbo.AspNetUsers");
             DropTable("dbo.Consoles");
             DropTable("dbo.Games");
             DropTable("dbo.Subjects");

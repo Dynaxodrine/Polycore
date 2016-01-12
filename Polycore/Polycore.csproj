@@ -174,9 +174,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601111221245_Evurryting.cs" />
-    <Compile Include="Migrations\201601111221245_Evurryting.Designer.cs">
-      <DependentUpon>201601111221245_Evurryting.cs</DependentUpon>
+    <Compile Include="Migrations\201601111744473_InitialCreate.cs" />
+    <Compile Include="Migrations\201601111744473_InitialCreate.Designer.cs">
+      <DependentUpon>201601111744473_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModel.cs" />
@@ -412,11 +412,15 @@
     <Content Include="Views\Admin\AddRoleToUser.cshtml" />
     <Content Include="Views\Admin\Dashboard.cshtml" />
     <Content Include="Views\Admin\Posts.cshtml" />
+    <Content Include="Views\Home\Subjects.cshtml" />
+    <Content Include="Views\Home\Consoles.cshtml" />
+    <Content Include="Views\Home\Games.cshtml" />
     <Content Include="Views\Home\Forum.cshtml" />
+    <Content Include="Views\Home\Titles.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201601111221245_Evurryting.resx">
-      <DependentUpon>201601111221245_Evurryting.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601111744473_InitialCreate.resx">
+      <DependentUpon>201601111744473_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
