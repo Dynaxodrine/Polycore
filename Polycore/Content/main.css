@@ -50,3 +50,15 @@ tr.hover td
     text-align: center;
     margin: 20px;
 }
+
+#Textarea
+{
+    width: 99%;
+    height: 100px;
+}
+
+hr {
+     background: #40434e; 
+     width: 100%; 
+     height: 1px;
+}

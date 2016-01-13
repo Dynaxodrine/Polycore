@@ -13,13 +13,12 @@ namespace Polycore.Models
         [Key]
         public int CommentID { get; set; }
         public string Content { get; set; }
-        public DateTime Commented { get; set; }
+        public DateTime? Commented { get; set; }
         public int Likes { get; set; }
         public int Dislikes { get; set; }
 
         public virtual ApplicationUser User { get; set; }
         public virtual CommentModel CommentParent { get; set; }
         public virtual List<CommentModel> Comments { get; set; }
-        public virtual PostModel Post { get; set; }
     }
 }

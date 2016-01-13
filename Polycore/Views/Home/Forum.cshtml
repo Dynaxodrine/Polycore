@@ -19,13 +19,36 @@
 
 <h2>Comments</h2>
 
+<h5>Add comment</h5>
+<div>
+    @using (Html.BeginForm("AddComment", "Home", new { id = Model.PostID }))
+    {
+        @Html.AntiForgeryToken()      
+
+        @Html.TextAreaFor(m => m.Comment.Content, new { id = "Textarea" })
+        
+        @Html.HiddenFor(m => m.Comment.Commented, new { Value = DateTime.Now.ToString("dd-MM-yyyy") })
+        <br />
+        <input type="submit" value="Add" />
+    }
+</div>
+
+<p class="hr"><hr /></p>
+
 <div>
     @foreach (var item in Model.Comments)
     {
-        @item.Likes
-        @item.Dislikes
-        <textarea>@item.Content</textarea>
-        @item.Commented
-        <br />
+        <div>
+            @item.Content
+       </div>
+       <br />
+       <div>
+           PostedBy:  @item.User.UserName<br />
+           PostedOn: @item.Commented<br />
+           Likes: @item.Likes<br />
+           DisLikes: @item.Dislikes
+       </div>
+
+       <p class="hr"><hr /></p>
     }
 </div>

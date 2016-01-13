@@ -46,14 +46,36 @@ namespace Polycore.Controllers
             return View(db.Posts.ToList().Where(p => p.Subject.SubjectID == id));
         }
 
-        public ActionResult Forum(int id = 0)
+        public ActionResult Forum(CommentModel model, int id = 0)
         {
             PostModel post = db.Posts.Find(id);
             if (post == null)
             {
                 return HttpNotFound();
             }
+
+            if (model.Likes != 0 && model.Dislikes != 0)
+            {
+                post.Comments.Add(model);
+            }
             return View(post);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddComment(CommentModel model, int id = 0)
+        {
+            PostModel post = db.Posts.Find(id);
+            
+            if (ModelState.IsValid)
+            {
+                db.Comments.Add(model);
+                db.SaveChanges();
+
+                return RedirectToAction("Forum", new { id = id });
+            }
+
+            return View(model);
         }
     }
 }
