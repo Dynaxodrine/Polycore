@@ -18,6 +18,8 @@ namespace Polycore.Models
         public int Dislikes { get; set; }
 
         public virtual ApplicationUser User { get; set; }
+        public virtual PostModel Post { get; set; }
+        public virtual NewsArticleModel NewsArticle { get; set; }
         public virtual CommentModel CommentParent { get; set; }
         public virtual List<CommentModel> Comments { get; set; }
     }
