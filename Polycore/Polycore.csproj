@@ -174,14 +174,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601141023023_Initial.cs" />
-    <Compile Include="Migrations\201601141023023_Initial.Designer.cs">
-      <DependentUpon>201601141023023_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201601141848130_InitialCreate.cs" />
+    <Compile Include="Migrations\201601141848130_InitialCreate.Designer.cs">
+      <DependentUpon>201601141848130_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModel.cs" />
     <Compile Include="Models\CommentModel.cs" />
     <Compile Include="Models\ConsoleModel.cs" />
+    <Compile Include="Models\ForumViewModel.cs" />
     <Compile Include="Models\GameModel.cs" />
     <Compile Include="Models\IdentityModel.cs" />
     <Compile Include="Models\ManageViewModel.cs" />
@@ -419,8 +420,8 @@
     <Content Include="Views\Home\Titles.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201601141023023_Initial.resx">
-      <DependentUpon>201601141023023_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601141848130_InitialCreate.resx">
+      <DependentUpon>201601141848130_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
