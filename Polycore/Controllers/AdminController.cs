@@ -80,7 +80,7 @@ namespace Polycore.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        public ActionResult User(string id)
+        public ActionResult Roles(string id)
         {
             var account = UserManager.FindById(id);
 

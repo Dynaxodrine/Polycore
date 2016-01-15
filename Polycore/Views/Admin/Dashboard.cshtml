@@ -2,20 +2,55 @@
 @{
     ViewBag.Title = "Dashboard";
 }
+<div class="span12">
+    <div class="template-wrapper">
+        <div class="block block-page_header_block span12 first ">
+            <div class="span12 block-title centered">
+                <h2>Dashboard</h2>
+                <p>You know what to do. Whatevs.</p>
+            </div>
+            <div class="span12 block-divider"></div>
+        </div>
+    </div>
+    <div class="block block-column_block span6 first cf">
+        <!-- Latest news -->
+        <div class="block span12 first cf">
+            <div class="title-wrapper">
+                <h3 class="widget-title">
+                    <i class="fa fa-user"></i>
+                    Users
+                </h3>
+                <div class="clear"></div>
+            </div>
+            <div class="wcontainer">
+                <strong>Name: </strong> Value<br/>
+                <strong>Name: </strong> Value<br />
+                <strong>Name: </strong> Value<br />
+                <strong>Name: </strong> Value<br/>
+                @Html.ActionLink("Manage Users", "Users", "Admin", null, new Dictionary<string, object>() { { "class", "button-green button-small" } })
+                <div class="clear"></div>
+            </div>
+        </div>
+        <!-- End Latest News -->
+    </div>
 
-<h2>Dashboard</h2>
-
-<dl class="dl-horizontal">
-    <dt>Users</dt>
-    <dd>
-
-        @Html.ActionLink("Manage users and roles", "Users", "Admin")
-
-    </dd>
-    <dt>Posts</dt>
-    <dd>
-
-        @Html.ActionLink("Manage posts", "Posts", "Admin")
-
-    </dd>
-</dl>
+    <div class="block block-column_block span6 cf">
+        <div class="block span12 cf">
+            <div class="title-wrapper">
+                <h3 class="widget-title">
+                    <i class="fa fa-file-text"></i>
+                    Posts
+                </h3>
+                <div class="clear"></div>
+            </div>
+            <div class="wcontainer">
+                <strong>Name: </strong> Value<br />
+                <strong>Name: </strong> Value<br />
+                <strong>Name: </strong> Value<br />
+                <strong>Name: </strong> Value<br />
+                @Html.ActionLink("Manage Posts", "Posts", "Admin", null, new Dictionary<string, object>() { { "class", "button-green button-small" } })
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>
