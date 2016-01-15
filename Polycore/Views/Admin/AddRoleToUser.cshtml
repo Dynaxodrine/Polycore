@@ -6,33 +6,48 @@
         Layout = "~/Views/Shared/_Error.cshtml";
     }
 }
-
-@if (User.IsInRole("Administrator"))
-{
-<h2>Add role to @Model.UserName.</h2>
-
-using (Html.BeginForm("AddRoleToUser", "Admin", FormMethod.Post))
-{
-    <div>
-        @if (ViewBag.Controller == "AddRoleToUser")
-        {
-            @Html.ValidationSummary("", new { @class = "text-danger" })
-        }
-        @Html.AntiForgeryToken()
-
-        <select name="rolename">
-            <option></option>
-            @foreach (var item in Model.RoleList)
-            {
-                <option value="@item.Name">@item.Name</option>
-            }
-        </select>
+<div class="span12">
+    <div class="template-wrapper">
+        <div class="block block-page_header_block span12 first ">
+            <div class="span12 block-title centered">
+                <h2>Roles</h2>
+                <p>Here you can add and remove roles of users? <small><i>Cool!</i></small></p>
+            </div>
+            <div class="span12 block-divider"></div>
+        </div>
     </div>
+    <div class="block block-column_block span12 first cf">
+        <!-- Latest news -->
+        <div class="block span12 first cf">
+            <div class="title-wrapper">
+                <h3 class="widget-title">
+                    <i class="fa fa-users"></i>
+                    Add Role to @Model.UserName
+                </h3>
+                <div class="clear"></div>
+            </div>
+            <div class="wcontainer">
+                @using (Html.BeginForm("AddRoleToUser", "Admin", FormMethod.Post))
+                {
+                    if (ViewBag.Controller == "AddRoleToUser")
+                    {
+                        @Html.ValidationSummary("", new {@class = "text-danger"})
+                    }
+                    @Html.AntiForgeryToken()
 
-    <input type="submit" value="Add">
-}
-
-<p>
-    @Html.ActionLink("Back", "Users", new { id = Model.UserId })
-</p>
+                    <select name="rolename">
+                        <option></option>
+                        @foreach (var item in Model.RoleList)
+                        {
+                            <option value="@item.Name">@item.Name</option>
+                        }
+                    </select>
+                    <br/>
+                    <input type="submit" value="Add" class="button-green button-small">
+                    @Html.ActionLink("Back", "Roles", new {id = Model.UserId}, new {@class = "button-green button-small"})
+                }
+            </div>
+        </div>
+    </div>
+</div>
 }

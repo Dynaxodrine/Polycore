@@ -48,7 +48,13 @@ namespace Polycore.Controllers
 
         public ActionResult Forum(int id = 0)
         {
-            PostModel post = db.Posts.Find(id);
+            PostModel post = db.Posts.SingleOrDefault(p => p.PostID == id);
+
+
+            if (post == null)
+            {
+                return HttpNotFound();
+            }
 
             var result = new ForumViewModel()
             {
@@ -61,11 +67,6 @@ namespace Polycore.Controllers
                 PostUserName = post.User.UserName,
                 Comments = post.Comments,
             };
-
-            if (post == null)
-            {
-                return HttpNotFound();
-            }
 
             return View(result);
         }

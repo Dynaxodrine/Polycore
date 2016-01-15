@@ -56,7 +56,7 @@
                             <td>@item.Comments.Count</td>
                             <td>
                                 @Html.ActionLink(" ", "User", "Admin", new {id = item.Id}, new {@class = "fa fa-fw fa-info"})
-                                @Html.ActionLink(" ", "Roles", "Admin", new { id = item.Id }, new Dictionary<string, object>() {{"class", "fa fa-fw fa-users"}})
+                                @Html.ActionLink(" ", "Roles", "Admin", new { id = item.Id }, new {@class = "fa fa-fw fa-users"})
                                 @if (item.Id != User.Identity.GetUserId())
                                 {
                                     @Ajax.ActionLink(" ", "DeleteUser", new {id = item.Id}, new AjaxOptions

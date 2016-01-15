@@ -37,7 +37,7 @@
                         <tr>
                             <td>@item</td>
                             <td>
-                                @Ajax.ActionLink("Verwijderen", "DeleteRoleFromUser", new {id = Model.UserId, rolename = item}, new AjaxOptions
+                                @Ajax.ActionLink(" ", "DeleteRoleFromUser", new {id = Model.UserId, rolename = item}, new AjaxOptions
                                 {
                                     Confirm = "Are you sure role: " + item + " must be deleted from user: " + Model.UserName + "?",
                                     HttpMethod = "Post",
