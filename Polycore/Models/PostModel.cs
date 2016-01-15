@@ -19,7 +19,6 @@ namespace Polycore.Models
         public int Likes { get; set; }
         public int Dislikes { get; set; }
 
-        public virtual CommentModel Comment { get; set; }
         public virtual SubjectModel Subject { get; set; }
         public virtual List<CommentModel> Comments { get; set; }
         public virtual ApplicationUser User { get; set; }

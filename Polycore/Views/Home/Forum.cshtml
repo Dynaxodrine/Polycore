@@ -1,20 +1,20 @@
-﻿@model Polycore.Models.PostModel
+﻿@model Polycore.Models.ForumViewModel
 
 @{
     ViewBag.Title = "Forum";
 }
 
-<h2>@Model.Title</h2>
+<h2>@Model.PostTitle</h2>
 
 <div>
-    @Model.Content
+    @Model.PostContent
 </div>
 <br />
 <div>
-    Likes: @Model.Likes <br />
-    DisLikes: @Model.Dislikes<br />
-    Posted: @Model.Posted<br />
-    PostedBy: @Model.User.UserName<br />    
+    Likes: @Model.PostLikes <br />
+    DisLikes: @Model.PostDislikes<br />
+    Posted: @Model.PostDate<br />
+    PostedBy: @Model.PostUserName<br />
 </div>
 
 <h2>Comments</h2>
@@ -23,11 +23,9 @@
 <div>
     @using (Html.BeginForm("AddComment", "Home", new { id = Model.PostID }))
     {
-        @Html.AntiForgeryToken()      
+        @Html.AntiForgeryToken()
 
-        @Html.TextAreaFor(m => m.Comment.Content, new { id = "Textarea" })
-        
-        @Html.HiddenFor(m => m.Comment.Commented, new { Value = DateTime.Now.ToString("dd-MM-yyyy") })
+        @Html.TextAreaFor(m => m.CommentContent, new { id = "Textarea" })
         <br />
         <input type="submit" value="Add" />
     }
@@ -40,15 +38,15 @@
     {
         <div>
             @item.Content
-       </div>
-       <br />
-       <div>
-           PostedBy:  @item.User.UserName<br />
-           PostedOn: @item.Commented<br />
-           Likes: @item.Likes<br />
-           DisLikes: @item.Dislikes
-       </div>
+        </div>
+        <br />
+        <div>
+            PostedBy:  @item.User.UserName<br />
+            PostedOn: @item.Commented<br />
+            Likes: @item.Likes<br />
+            DisLikes: @item.Dislikes
+        </div>
 
-       <p class="hr"><hr /></p>
+        <p class="hr"><hr /></p>
     }
 </div>
