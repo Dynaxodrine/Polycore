@@ -34,7 +34,7 @@
                         @Html.ValidationSummary("", new {@class = "text-danger"})
                     }
                     @Html.AntiForgeryToken()
-
+                    <br />
                     <select name="rolename">
                         <option></option>
                         @foreach (var item in Model.RoleList)
@@ -42,12 +42,13 @@
                             <option value="@item.Name">@item.Name</option>
                         }
                     </select>
-                    <br/>
-                    <input type="submit" value="Add" class="button-green button-small">
-                    @Html.ActionLink("Back", "Roles", new {id = Model.UserId}, new {@class = "button-green button-small"})
+                    <br/><br />
+                    <div>
+                        <input type="submit" value="Add" class="button-green button-small">
+                        @Html.ActionLink("Back", "Roles", new { id = Model.UserId }, new { @class = "actionlink" })
+                    </div>
                 }
             </div>
         </div>
     </div>
 </div>
-}

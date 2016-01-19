@@ -45,7 +45,7 @@
 
                     @foreach (var item in Model)
                     {
-                        <tr onclick="location.href = '@(Url.Action("User", new {id = item.Id}))'">
+                        <tr>
                             <td>@item.Id</td>
                             <td>@item.UserName</td>
                             <td>@item.Email</td>
@@ -55,7 +55,7 @@
                             <td>@item.NewsArticles.Count</td>
                             <td>@item.Comments.Count</td>
                             <td>
-                                @Html.ActionLink(" ", "User", "Admin", new {id = item.Id}, new {@class = "fa fa-fw fa-info"})
+                                @Html.ActionLink(" ", "Users", "Admin", new { id = item.Id}, new {@class = "fa fa-fw fa-info"})
                                 @Html.ActionLink(" ", "Roles", "Admin", new { id = item.Id }, new {@class = "fa fa-fw fa-users"})
                                 @if (item.Id != User.Identity.GetUserId())
                                 {
