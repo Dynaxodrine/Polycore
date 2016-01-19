@@ -1,4 +1,4 @@
-﻿@model Polycore.Models.DashboardViewModel
+﻿
 @{
     ViewBag.Title = "Dashboard";
 }
@@ -23,15 +23,10 @@
                 <div class="clear"></div>
             </div>
             <div class="wcontainer">
-                @*<strong>Name: </strong> Value<br/>
+                <strong>Name: </strong> Value<br/>
                 <strong>Name: </strong> Value<br />
                 <strong>Name: </strong> Value<br />
-                <strong>Name: </strong> Value<br/>*@
-                <b>Username</b><br />
-                @foreach(var item in Model.users)
-                {
-                    @item<br />
-                }
+                <strong>Name: </strong> Value<br/>
                 @Html.ActionLink("Manage Users", "Users", "Admin", null, new Dictionary<string, object>() { { "class", "button-green button-small" } })
                 <div class="clear"></div>
             </div>
@@ -49,15 +44,10 @@
                 <div class="clear"></div>
             </div>
             <div class="wcontainer">
-                @*<strong>Name: </strong> Value<br />
                 <strong>Name: </strong> Value<br />
                 <strong>Name: </strong> Value<br />
-                <strong>Name: </strong> Value<br />*@
-                <b>Title</b><br />
-                @foreach(var item in Model.posts)
-                {
-                    @item<br />
-                }
+                <strong>Name: </strong> Value<br />
+                <strong>Name: </strong> Value<br />
                 @Html.ActionLink("Manage Posts", "Posts", "Admin", null, new Dictionary<string, object>() { { "class", "button-green button-small" } })
                 <div class="clear"></div>
             </div>

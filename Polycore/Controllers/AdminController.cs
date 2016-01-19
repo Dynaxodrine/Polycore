@@ -51,19 +51,13 @@ namespace Polycore.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult Dashboard()
         {
-            var lists = new DashboardViewModel
-            {
-                users = db.Users.Select(u => u.UserName).ToList(),
-                posts = db.Posts.Select(p => p.Title).ToList(),
-            };
-
-            return View(lists);
+            return View();
         }
 
         [Authorize(Roles = "Administrator")]
         public ActionResult Posts()
         {
-            return View(db.Posts.ToList());
+            return View(db.NewsArticles.ToList());
         }
 
         [Authorize(Roles = "Administrator")]
@@ -129,7 +123,7 @@ namespace Polycore.Controllers
                 // Add role to user.
                 UserManager.AddToRole(account.Id, rolename);
 
-                return RedirectToAction("Roles", new { id = account.Id });
+                return RedirectToAction("User", new { id = account.Id });
             }
 
             ModelState.AddModelError("", "You did not select a role.");
@@ -154,7 +148,7 @@ namespace Polycore.Controllers
             // Remove role from user.
             UserManager.RemoveFromRole(account.Id, rolename);
 
-            return RedirectToAction("Roles", new { id = account.Id });
+            return RedirectToAction("User", new { id = account.Id });
         }
     }
 }

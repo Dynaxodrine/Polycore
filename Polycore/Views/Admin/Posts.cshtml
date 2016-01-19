@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Polycore.Models.PostModel>
+﻿@model IEnumerable<Polycore.Models.NewsArticleModel>
 @{
     ViewBag.Title = "Posts";
 }
@@ -15,16 +15,16 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td @*onclick="location.href = '@(Url.Action("DetailsPost", new { id = item.PostID}))'"*@>@item.Title</td>
-            <td @*onclick="location.href = '@(Url.Action("DetailsPost", new { id = item.PostID }))'"*@>@item.Posted</td>
+            @*@<td onclick="location.href = '@(Url.Action("DetailsPost", new { id = item.ForumPostId}))'">@item.Title</td>
+            <td onclick="location.href = '@(Url.Action("DetailsPost", new { id = item.ForumPostId }))'">@item.Posted</td>
             <td>
-               @Ajax.ActionLink("Verwijderen", "DeletePost", new { id = item.PostID }, new AjaxOptions
+               @Ajax.ActionLink("Verwijderen", "DeletePost", new { id = item.ForumPostId }, new AjaxOptions
                {
                    Confirm = "Are you sure post: " + item.Title + " must be deleted?",
                    HttpMethod = "Post",
                    OnSuccess = "window.location.reload()"
                })
-            </td>
+            </td>*@
         </tr>
     }
 </table>
@@ -36,5 +36,5 @@
 @section Scripts {
     @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
     @Scripts.Render("~/Scripts/jquery.js")
-    @*@Scripts.Render("~/Scripts/SelectBar.js")*@
+    @Scripts.Render("~/Scripts/SelectBar.js")
 }
