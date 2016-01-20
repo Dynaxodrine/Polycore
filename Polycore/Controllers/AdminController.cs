@@ -66,6 +66,21 @@ namespace Polycore.Controllers
             return View(db.Posts.ToList());
         }
 
+        [Authorize(Roles = "Administrator")]
+        public ActionResult AddPosts()
+        {
+            return View();
+        }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //[Authorize(Roles = "Administrator")]
+        //public ActionResult AddPosts()
+        //{
+        //    ViewBag.Controller = "AddPosts";
+        //    return View();
+        //}
+
         [HttpPost]
         [Authorize(Roles = "Administrator")]
         public ActionResult DeletePosts(int id = 0)
