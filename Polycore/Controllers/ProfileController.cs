@@ -12,7 +12,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 namespace Polycore.Controllers
 {
     [Authorize]
-    public class ProfileController : Controller
+    public class ProfileController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;

@@ -1,6 +1,8 @@
-﻿
+﻿@using Polycore.Models
+
 @{
     ViewBag.Title = "Dashboard";
+    var db = new ApplicationDbContext();
 }
 <div class="span12">
     <div class="template-wrapper">
@@ -23,10 +25,11 @@
                 <div class="clear"></div>
             </div>
             <div class="wcontainer">
-                <strong>Name: </strong> Value<br/>
-                <strong>Name: </strong> Value<br />
-                <strong>Name: </strong> Value<br />
-                <strong>Name: </strong> Value<br/>
+                <strong>User Count: </strong> @(db.Users.Count())<br/>
+                <strong>Admin Count: </strong> @(db.Users.Count(p => p.Roles.Count(b => b.RoleId == db.Roles.FirstOrDefault(c => c.Name == "Administrator").Id) == 1))<br />
+                <strong>Editor Count: </strong> @(db.Users.Count(p => p.Roles.Count(b => b.RoleId == db.Roles.FirstOrDefault(c => c.Name == "Editor").Id) == 1))<br />
+                <strong>Moderator Count: </strong> @(db.Users.Count(p => p.Roles.Count(b => b.RoleId == db.Roles.FirstOrDefault(c => c.Name == "Moderator").Id) == 1))<br />
+                <strong>Member Count: </strong> @(db.Users.Count(p => p.Roles.Count(b => b.RoleId == db.Roles.FirstOrDefault(c => c.Name == "Member").Id) == 1))<br />
                 @Html.ActionLink("Manage Users", "Users", "Admin", null, new Dictionary<string, object>() { { "class", "button-green button-small" } })
                 <div class="clear"></div>
             </div>
@@ -44,10 +47,9 @@
                 <div class="clear"></div>
             </div>
             <div class="wcontainer">
-                <strong>Name: </strong> Value<br />
-                <strong>Name: </strong> Value<br />
-                <strong>Name: </strong> Value<br />
-                <strong>Name: </strong> Value<br />
+                <strong>News Articles: </strong> @(db.NewsArticles.Count())<br />
+                <strong>Newest Article: </strong> @(db.NewsArticles.OrderByDescending(p => p.Published).FirstOrDefault()?.Title)<br />
+                <strong>Newest Article Comments: </strong> @(db.NewsArticles.OrderByDescending(p => p.Published).FirstOrDefault()?.Comments.Count())<br />
                 @Html.ActionLink("Manage Posts", "Posts", "Admin", null, new Dictionary<string, object>() { { "class", "button-green button-small" } })
                 <div class="clear"></div>
             </div>

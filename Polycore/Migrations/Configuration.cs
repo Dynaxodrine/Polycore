@@ -40,7 +40,7 @@ namespace Polycore.Migrations
 
             var store = new UserStore<ApplicationUser>(context);
             var manager = new UserManager<ApplicationUser>(store);
-            var jeffrey = new ApplicationUser
+            /*var jeffrey = new ApplicationUser
             {
                 UserName = "JeffreyZwirs",
                 Email = "jeffreyzwirs@gmail.com",
@@ -59,16 +59,9 @@ namespace Polycore.Migrations
 
             manager.Create(hugo, "123456");
             manager.AddToRole(hugo.Id, "Administrator");
-            manager.AddToRole(hugo.Id, "Member");
+            manager.AddToRole(hugo.Id, "Member");*/
 
-            //var consoles = new List<ConsoleModel>{
-            //    new ConsoleModel { Name = "PC" },
-            //    new ConsoleModel { Name = "Xbox One" },
-            //    new ConsoleModel { Name = "Playstation 4" }
-            //};
-
-            //consoles.ForEach(c => context.Consoles.AddOrUpdate(m => m.Name, c));
-            //context.SaveChanges();
+            
 
             //var games = new List<GameModel>{
             //    new GameModel { Name = "Starcraft 2 legacy of the void" },

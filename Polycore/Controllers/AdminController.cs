@@ -9,7 +9,7 @@ using Polycore.Models;
 
 namespace Polycore.Controllers
 {
-    public class AdminController : Controller
+    public class AdminController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;

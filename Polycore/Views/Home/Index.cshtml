@@ -1,7 +1,8 @@
-﻿@{
+﻿@using Polycore.Models
+@{
     ViewBag.Title = "Home Page";
+    var db = new ApplicationDbContext();
 }
-
 
 <div class="span12 block-title centered">
     <h2>Polycore</h2>
@@ -20,39 +21,25 @@
             </h3>
             <div class="clear"></div>
         </div>
-        <div class="wcontainer">
-            <div class="span12">
-                <h2>News item</h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna. Nunc viverra imperdiet enim. Fusce est.
-                    Vivamus a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci. Aenean nec lorem.
-                    In porttitor. Donec laoreet nonummy augue. Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.
-                    Fusce aliquet pede non pede. Suspendisse dapibus lorem pellentesque magna. Integer nulla. Donec blandit feugiat ligula. Donec hendrerit, felis et imperdiet euismod, purus ipsum pretium metus, in lacinia nulla nisl eget sapien.
-                    Donec ut est in lectus consequat consequat. Etiam eget dui. Aliquam erat volutpat. Sed at lorem in nunc porta tristique. Proin nec augue.
-                </p>
+        <div class="wcontainer">@*
+    @foreach (var article in db.NewsArticles)
+    {
+        <div class="span12">
+            <h2>@article.Title</h2>
+            <p>
+                @article.Content
+            </p>
+        </div>
+        <div class="blog-info">
+            <div class="post-pinfo">
+                <span class="icon-user"></span> <a>@article.User.UserName</a> &nbsp;
+                <span class="icon-comment"></span>  <a data-original-title="@article.Comments.Count() Comments" href="#" data-toggle="tooltip">@article.Comments.Count() Comments</a> &nbsp;
+                <span class="fa fa-fw fa-calendar"></span>    <a href="#">@article.Comments.Count() </a>
             </div>
-            <div class="span12 block-divider"></div>
-            <div class="span12">
-                <h2>News article</h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna. Nunc viverra imperdiet enim. Fusce est.
-                    Vivamus a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci. Aenean nec lorem.
-                    In porttitor. Donec laoreet nonummy augue. Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.
-                    Fusce aliquet pede non pede. Suspendisse dapibus lorem pellentesque magna. Integer nulla. Donec blandit feugiat ligula. Donec hendrerit, felis et imperdiet euismod, purus ipsum pretium metus, in lacinia nulla nisl eget sapien.
-                    Donec ut est in lectus consequat consequat. Etiam eget dui. Aliquam erat volutpat. Sed at lorem in nunc porta tristique. Proin nec augue.
-                </p>
-            </div>
-            <div class="span12 block-divider"></div>
-            <div class="span12">
-                <h2>News article</h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna. Nunc viverra imperdiet enim. Fusce est.
-                    Vivamus a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci. Aenean nec lorem.
-                    In porttitor. Donec laoreet nonummy augue. Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.
-                    Fusce aliquet pede non pede. Suspendisse dapibus lorem pellentesque magna. Integer nulla. Donec blandit feugiat ligula. Donec hendrerit, felis et imperdiet euismod, purus ipsum pretium metus, in lacinia nulla nisl eget sapien.
-                    Donec ut est in lectus consequat consequat. Etiam eget dui. Aliquam erat volutpat. Sed at lorem in nunc porta tristique. Proin nec augue.
-                </p>
-            </div>
+            <div class="clear"></div>
+        </div>
+    }*@
+            
             <div class="clear"></div>
         </div>
     </div>

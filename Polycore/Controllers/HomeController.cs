@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -7,7 +8,7 @@ using Polycore.Models;
 
 namespace Polycore.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
@@ -38,7 +39,7 @@ namespace Polycore.Controllers
 
         public ActionResult Subjects(int id = 0)
         {
-            return View(db.Subjects.ToList().Where(s => s.Game.GameID == id));
+            return View(db.Subjects.Where(s => s.Game != null && s.Game.GameID == id));
         }
 
         public ActionResult Titles(int id = 0)
