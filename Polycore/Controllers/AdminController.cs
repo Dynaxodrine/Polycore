@@ -61,13 +61,13 @@ namespace Polycore.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        public ActionResult Posts()
+        public ActionResult NewsArticles()
         {
-            return View(db.Posts.ToList());
+            return View(db.NewsArticles.ToList());
         }
 
         [Authorize(Roles = "Administrator")]
-        public ActionResult AddPosts()
+        public ActionResult AddNewsArticle()
         {
             return View();
         }
@@ -75,7 +75,7 @@ namespace Polycore.Controllers
         //[HttpPost]
         //[ValidateAntiForgeryToken]
         //[Authorize(Roles = "Administrator")]
-        //public ActionResult AddPosts()
+        //public ActionResult AddNewsArticle()
         //{
         //    ViewBag.Controller = "AddPosts";
         //    return View();
@@ -83,16 +83,16 @@ namespace Polycore.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Administrator")]
-        public ActionResult DeletePosts(int id = 0)
+        public ActionResult DeleteNewsArticle(int id = 0)
         {
-            PostModel posts = db.Posts.Find(id);
+            NewsArticleModel newsarticle = db.NewsArticles.Find(id);
 
-            if (posts != null)
+            if (newsarticle != null)
             {
-                db.Posts.Remove(posts);
+                db.NewsArticles.Remove(newsarticle);
                 db.SaveChanges();
 
-                return RedirectToAction("Posts");
+                return RedirectToAction("NewsArticles");
             }
             return View();
         }

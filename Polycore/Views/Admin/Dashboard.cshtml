@@ -42,7 +42,7 @@
             <div class="title-wrapper">
                 <h3 class="widget-title">
                     <i class="fa fa-file-text"></i>
-                    Posts
+                    News articles
                 </h3>
                 <div class="clear"></div>
             </div>
@@ -50,7 +50,7 @@
                 <strong>News Articles: </strong> @(db.NewsArticles.Count())<br />
                 <strong>Newest Article: </strong> @(db.NewsArticles.OrderByDescending(p => p.Published).FirstOrDefault()?.Title)<br />
                 <strong>Newest Article Comments: </strong> @(db.NewsArticles.OrderByDescending(p => p.Published).FirstOrDefault()?.Comments.Count())<br />
-                @Html.ActionLink("Manage Posts", "Posts", "Admin", null, new Dictionary<string, object>() { { "class", "button-green button-small" } })
+                @Html.ActionLink("Manage News articles", "NewsArticles", "Admin", null, new Dictionary<string, object>() { { "class", "button-green button-small" } })
                 <div class="clear"></div>
             </div>
         </div>

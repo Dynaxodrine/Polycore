@@ -1,6 +1,6 @@
-﻿@model IEnumerable<Polycore.Models.PostModel>
+﻿@model IEnumerable<Polycore.Models.NewsArticleModel>
 @{
-    ViewBag.Title = "Posts index";
+    ViewBag.Title = "News articles index";
     if (!User.IsInRole("Administrator"))
     {
         Layout = "~/Views/Shared/_Error.cshtml";
@@ -10,7 +10,7 @@
     <div class="template-wrapper">
         <div class="block block-page_header_block span12 first ">
             <div class="span12 block-title centered">
-                <h2>Manage Posts</h2>
+                <h2>Manage news articles</h2>
                 <p>The info and stuff, right?</p>
             </div>
             <div class="span12 block-divider"></div>
@@ -22,7 +22,7 @@
             <div class="title-wrapper">
                 <h3 class="widget-title">
                     <i class="fa fa-user"></i>
-                    Posts
+                    News articles
                 </h3>
                 <div class="clear"></div>
             </div>
@@ -31,12 +31,8 @@
                     <thead>
                         <tr>
                             <th>Title</th>
-                            <th>Description</th>
-                            <th>Subject name</th>
                             <th>User name</th>
-                            <th>Likes</th>
-                            <th>Dislikes</th>
-                            <th>Posted</th>
+                            <th>Published</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -45,18 +41,14 @@
                     {
                         <tr>
                             <td>@item.Title</td>
-                            <td>@item.Description</td>
-                            <td>@item.Subject.Name</td>
                             <td>@item.User.UserName</td>
-                            <td>@item.Likes</td>
-                            <td>@item.Dislikes</td>
-                            <td>@item.Posted</td>
+                            <td>@item.Published</td>
                             <td>
-                                @Html.ActionLink(" ", "Posts", "Admin", new { id = item.PostID }, new { @class = "fa fa-fw fa-info" })
-                                @Html.ActionLink(" ", "AddPosts", "Admin", new { id = item.PostID }, new { @class = "fa fa-fw fa-users" })
-                                @Ajax.ActionLink(" ", "DeletePosts", new { id = item.PostID }, new AjaxOptions
+                                @Html.ActionLink(" ", "AddNewsArticle", "Admin", new { id = item.NewsArticleID }, new { @class = "fa fa-fw fa-info" })
+                                @Html.ActionLink(" ", "AddNewsArticle", "Admin", new { id = item.NewsArticleID }, new { @class = "fa fa-fw fa-users" })
+                                @Ajax.ActionLink(" ", "DeleteNewsArticle", new { id = item.NewsArticleID }, new AjaxOptions
                                 {
-                                    Confirm = "Are you sure the post with title: " + item.Title + " must be deleted?",
+                                    Confirm = "Are you sure the news article with title: " + item.Title + " must be deleted?",
                                     HttpMethod = "Post",
                                     OnSuccess = "window.location.reload()"
                                 }, new { @class = "fa fa-fw fa-trash-o" })
