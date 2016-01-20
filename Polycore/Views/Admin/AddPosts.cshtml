@@ -1,0 +1,55 @@
+﻿@model Polycore.Models.PostModel
+@{
+    ViewBag.Title = "Add posts";
+    if (!User.IsInRole("Administrator"))
+    {
+        Layout = "~/Views/Shared/_Error.cshtml";
+    }
+}
+<div class="span12">
+    <div class="template-wrapper">
+        <div class="block block-page_header_block span12 first ">
+            <div class="span12 block-title centered">
+                <h2>Posts</h2>
+                <p>Here you can add and remove posts? <small><i>Cool!</i></small></p>
+            </div>
+            <div class="span12 block-divider"></div>
+        </div>
+    </div>
+    <div class="block block-column_block span12 first cf">
+        <!-- Latest news -->
+        <div class="block span12 first cf">
+            <div class="title-wrapper">
+                <h3 class="widget-title">
+                    <i class="fa fa-users"></i>
+                    Add Posts
+                </h3>
+                <div class="clear"></div>
+            </div>
+            <div class="wcontainer">
+                @using (Html.BeginForm("AddPosts", "Admin", FormMethod.Post))
+                {
+                    if (ViewBag.Controller == "AddPosts")
+                    {
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                    }
+                    @Html.AntiForgeryToken()
+                    <br />
+                    @*<select name="userid">
+                        <option></option>
+                        @foreach (var item in Model)
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    </select>*@
+                    <br /><br />
+                    <div>
+                        <input type="submit" value="Add" class="button-green button-small">
+                        ,@Html.ActionLink("Back", "Posts", null, new { @class = "actionlink" })
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
