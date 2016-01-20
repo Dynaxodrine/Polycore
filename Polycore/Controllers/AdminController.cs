@@ -66,10 +66,26 @@ namespace Polycore.Controllers
             return View(db.Posts.ToList());
         }
 
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        public ActionResult DeletePosts(int id = 0)
+        {
+            PostModel posts = db.Posts.Find(id);
+
+            if (posts != null)
+            {
+                db.Posts.Remove(posts);
+                db.SaveChanges();
+
+                return RedirectToAction("Posts");
+            }
+            return View();
+        }
+
         [Authorize(Roles = "Administrator")]
         public ActionResult Users()
         {
-                return View(UserManager.Users.ToList());
+            return View(UserManager.Users.ToList());
         }
 
         // POST: Manage/DeleteUser/1
@@ -79,10 +95,14 @@ namespace Polycore.Controllers
         {
             var account = UserManager.FindById(id);
 
-            // Remove user.
-            UserManager.Delete(account);
+            if (account != null)
+            {
+                // Remove user.
+                UserManager.Delete(account);
 
-            return RedirectToAction("Users");
+                return RedirectToAction("Users");
+            }
+            return View();
         }
 
         [Authorize(Roles = "Administrator")]
@@ -151,10 +171,14 @@ namespace Polycore.Controllers
         {
             var account = UserManager.FindById(id);
 
-            // Remove role from user.
-            UserManager.RemoveFromRole(account.Id, rolename);
+            if (account != null && rolename != "")
+            {
+                // Remove role from user.
+                UserManager.RemoveFromRole(account.Id, rolename);
 
-            return RedirectToAction("Roles", new { id = account.Id });
+                return RedirectToAction("Roles", new { id = account.Id });
+            }
+            return View();
         }
     }
 }
