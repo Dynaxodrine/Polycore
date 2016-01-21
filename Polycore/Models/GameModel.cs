@@ -15,7 +15,7 @@ namespace Polycore.Models
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public virtual ConsoleModel Console { get; set; }
+        public virtual PlatformModel Platform { get; set; }
         public virtual List<SubjectModel> Subjects { get; set; }
     }
 }

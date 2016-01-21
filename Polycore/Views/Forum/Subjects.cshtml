@@ -8,5 +8,5 @@
 
 @foreach (var item in Model)
 {
-    <div> - @Html.ActionLink(item.Name, "Titles", new { id = item.SubjectID })</div>
+    <div> - @Html.ActionLink(item.Name, "Forum", new { subject = item.Name, id = item.SubjectID })</div>
 }

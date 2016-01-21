@@ -43,7 +43,7 @@ namespace Polycore.Models
         
         public DbSet<SubjectModel> Subjects { get; set; }
         public DbSet<GameModel> Games { get; set; }
-        public DbSet<ConsoleModel> Consoles { get; set; }
+        public DbSet<PlatformModel> Platforms { get; set; }
         public DbSet<CommentModel> Comments { get; set; }
         public DbSet<PostModel> Posts { get; set; }
         public DbSet<NewsArticleModel> NewsArticles { get; set; }

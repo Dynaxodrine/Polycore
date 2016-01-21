@@ -170,20 +170,20 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ForumController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601171317269_InitialCreate.cs" />
-    <Compile Include="Migrations\201601171317269_InitialCreate.Designer.cs">
-      <DependentUpon>201601171317269_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201601211401515_Initial.cs" />
+    <Compile Include="Migrations\201601211401515_Initial.Designer.cs">
+      <DependentUpon>201601211401515_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModel.cs" />
     <Compile Include="Models\CommentModel.cs" />
-    <Compile Include="Models\ConsoleModel.cs" />
-    <Compile Include="Models\DashboardViewModel.cs" />
+    <Compile Include="Models\PlatformModel.cs" />
     <Compile Include="Models\ForumViewModel.cs" />
     <Compile Include="Models\GameModel.cs" />
     <Compile Include="Models\IdentityModel.cs" />
@@ -414,18 +414,17 @@
     <Content Include="Views\Admin\AddRoleToUser.cshtml" />
     <Content Include="Views\Admin\Dashboard.cshtml" />
     <Content Include="Views\Admin\NewsArticles.cshtml" />
-    <Content Include="Views\Home\Subjects.cshtml" />
-    <Content Include="Views\Home\Consoles.cshtml" />
-    <Content Include="Views\Home\Games.cshtml" />
-    <Content Include="Views\Home\Forum.cshtml" />
-    <Content Include="Views\Home\Titles.cshtml" />
+    <Content Include="Views\Forum\Subjects.cshtml" />
+    <Content Include="Views\Forum\Platforms.cshtml" />
+    <Content Include="Views\Forum\Games.cshtml" />
+    <Content Include="Views\Forum\Forum.cshtml" />
     <Content Include="Views\Admin\Roles.cshtml" />
     <Content Include="Views\Shared\_Error.cshtml" />
     <Content Include="Views\Admin\AddNewsArticle.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201601171317269_InitialCreate.resx">
-      <DependentUpon>201601171317269_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601211401515_Initial.resx">
+      <DependentUpon>201601211401515_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

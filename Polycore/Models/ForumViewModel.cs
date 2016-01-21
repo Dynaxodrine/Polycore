@@ -9,6 +9,13 @@ namespace Polycore.Models
     public class ForumViewModel
     {
         public int PostID { get; set; }
+        public int PlatformID { get; set; }
+        public int GameID { get; set; }
+
+        public string PlatformName { get; set; }
+        public string GameName { get; set; }
+        public string SubjectName { get; set; }
+
         public string PostTitle { get; set; }
         public string PostContent { get; set; }
         public int PostLikes { get; set; }

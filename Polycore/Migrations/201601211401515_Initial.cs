@@ -3,7 +3,7 @@ namespace Polycore.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
@@ -137,21 +137,21 @@ namespace Polycore.Migrations
                         GameID = c.Int(nullable: false, identity: true),
                         Name = c.String(),
                         Description = c.String(),
-                        Console_ConsoleID = c.Int(),
+                        Platform_PlatformID = c.Int(),
                     })
                 .PrimaryKey(t => t.GameID)
-                .ForeignKey("dbo.Consoles", t => t.Console_ConsoleID)
-                .Index(t => t.Console_ConsoleID);
+                .ForeignKey("dbo.Platforms", t => t.Platform_PlatformID)
+                .Index(t => t.Platform_PlatformID);
             
             CreateTable(
-                "dbo.Consoles",
+                "dbo.Platforms",
                 c => new
                     {
-                        ConsoleID = c.Int(nullable: false, identity: true),
+                        PlatformID = c.Int(nullable: false, identity: true),
                         Name = c.String(),
                         Description = c.String(),
                     })
-                .PrimaryKey(t => t.ConsoleID);
+                .PrimaryKey(t => t.PlatformID);
             
             CreateTable(
                 "dbo.AspNetUserRoles",
@@ -186,7 +186,7 @@ namespace Polycore.Migrations
             DropForeignKey("dbo.Subjects", "SubjectParent_SubjectID", "dbo.Subjects");
             DropForeignKey("dbo.Posts", "Subject_SubjectID", "dbo.Subjects");
             DropForeignKey("dbo.Subjects", "Game_GameID", "dbo.Games");
-            DropForeignKey("dbo.Games", "Console_ConsoleID", "dbo.Consoles");
+            DropForeignKey("dbo.Games", "Platform_PlatformID", "dbo.Platforms");
             DropForeignKey("dbo.Comments", "Post_PostID", "dbo.Posts");
             DropForeignKey("dbo.NewsArticles", "User_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
@@ -197,7 +197,7 @@ namespace Polycore.Migrations
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
-            DropIndex("dbo.Games", new[] { "Console_ConsoleID" });
+            DropIndex("dbo.Games", new[] { "Platform_PlatformID" });
             DropIndex("dbo.Subjects", new[] { "SubjectParent_SubjectID" });
             DropIndex("dbo.Subjects", new[] { "Game_GameID" });
             DropIndex("dbo.Posts", new[] { "User_Id" });
@@ -212,7 +212,7 @@ namespace Polycore.Migrations
             DropIndex("dbo.Comments", new[] { "CommentParent_CommentID" });
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.AspNetUserRoles");
-            DropTable("dbo.Consoles");
+            DropTable("dbo.Platforms");
             DropTable("dbo.Games");
             DropTable("dbo.Subjects");
             DropTable("dbo.Posts");

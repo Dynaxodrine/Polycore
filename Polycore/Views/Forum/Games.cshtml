@@ -10,6 +10,6 @@
 {
     foreach (var item in Model)
     {
-        <div> - @Html.ActionLink(item.Name, "Subjects", new { id = item.GameID })</div>
+        <div> - @Html.ActionLink(item.Name, "Subjects", new { game = item.Name, id = item.GameID })</div>
     }
 }

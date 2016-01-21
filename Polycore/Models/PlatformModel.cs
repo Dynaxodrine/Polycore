@@ -7,11 +7,11 @@ using System.Web;
 
 namespace Polycore.Models
 {
-    [Table("Consoles")]
-    public class ConsoleModel
+    [Table("Platforms")]
+    public class PlatformModel
     {
         [Key]
-        public int ConsoleID { get; set; }
+        public int PlatformID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
 

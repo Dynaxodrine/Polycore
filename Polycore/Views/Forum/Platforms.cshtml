@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Polycore.Models.PlatformModel>
+
+@{
+    ViewBag.Title = "Platforms";
+}
+
+<h2>Consoles</h2>
+
+@foreach (var item in Model)
+{
+    <div> - @Html.ActionLink(item.Name, "Games", new { platform = item.Name, id = item.PlatformID })</div>
+}
