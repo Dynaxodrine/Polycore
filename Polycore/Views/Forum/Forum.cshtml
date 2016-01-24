@@ -5,8 +5,8 @@
 }
 
 <h2>@Html.ActionLink(Model.PlatformName, "Platforms", "Forum") --> 
-    @Html.ActionLink(Model.GameName, "Games", new { id = Model.PlatformID }) -->
-    @Html.ActionLink(Model.SubjectName, "Subjects", new { id = Model.GameID }) -->
+    @Html.ActionLink(Model.GameName, "Games", new { platform = Model.PlatformName, id = Model.PlatformID }) -->
+    @Html.ActionLink(Model.SubjectName, "Subjects", new { platform = Model.PlatformName, game = Model.GameName, id = Model.GameID }) -->
     @Model.PostTitle
 </h2>
 
@@ -15,17 +15,31 @@
 </div>
 <br />
 <div>
-    Likes: @Model.PostLikes <br />
-    DisLikes: @Model.PostDislikes<br />
-    Posted: @Model.PostDate<br />
-    PostedBy: @Model.PostUserName<br />
+    <b>Likes:</b> @Model.PostLikes <br />
+    <b>DisLikes:</b> @Model.PostDislikes<br />
+    <b>Posted:</b> @Model.PostDate<br />
+    <b>PostedBy:</b> @Model.PostUserName<br />
+    <b>Game also available on other platforms:</b> 
+    @foreach (var item in Model.Games)
+    {
+        if (item.Platform.Name != Model.PlatformName)
+        {
+            <br />
+            <text>- </text>@Html.ActionLink(item.Platform.Name, "Subjects", new { platform = item.Platform.Name, game = item.Name, id = item.GameID })
+        }
+        else if (Model.Games.Count() == 1)
+        {            
+            <br />
+            <text>No other platforms available.</text>
+        }
+    }
 </div>
 
 <h2>Comments</h2>
 
 <h5>Add comment</h5>
 <div>
-    @using (Html.BeginForm("AddComment", "Home", new { id = Model.PostID }))
+    @using (Html.BeginForm("AddComment", "Forum", new { id = Model.PostID }))
     {
         @Html.AntiForgeryToken()
 
@@ -41,14 +55,17 @@
     @foreach (var item in Model.Comments)
     {
         <div>
+            <b>PostedBy:</b> @item.User.UserName<br />
+            <b>PostedOn:</b> @item.Commented<br />
+        </div>
+        <br />
+        <div>
             @item.Content
         </div>
         <br />
         <div>
-            PostedBy:  @item.User.UserName<br />
-            PostedOn: @item.Commented<br />
-            Likes: @item.Likes<br />
-            DisLikes: @item.Dislikes
+            <b>Likes:</b> @item.Likes<br />
+            <b>DisLikes:</b> @item.Dislikes
         </div>
 
         <p class="hr"><hr /></p>

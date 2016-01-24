@@ -51,13 +51,7 @@ namespace Polycore.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult Dashboard()
         {
-            //var lists = new DashboardViewModel
-            //{
-            //    users = db.Users.Select(u => u.UserName).ToList(),
-            //    posts = db.Posts.Select(p => p.Title).ToList(),
-            //};
-
-            return View(/*lists*/);
+            return View();
         }
 
         [Authorize(Roles = "Administrator")]

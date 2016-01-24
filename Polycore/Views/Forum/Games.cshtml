@@ -4,12 +4,12 @@
     ViewBag.Title = "Games";
 }
 
-<h2>Games</h2>
+<h2>@ViewBag.Platform --> Games</h2>
 
 @if (Model != null)
 {
     foreach (var item in Model)
     {
-        <div> - @Html.ActionLink(item.Name, "Subjects", new { game = item.Name, id = item.GameID })</div>
+        <div> - @Html.ActionLink(item.Name, "Subjects", new { platform = ViewBag.Platform, game = item.Name, id = item.GameID })</div>
     }
 }
