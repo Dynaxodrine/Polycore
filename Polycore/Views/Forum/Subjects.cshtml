@@ -8,5 +8,5 @@
 
 @foreach (var item in Model)
 {
-    <div> - @Html.ActionLink(item.Name, "Forum", new { platform = ViewBag.Platform, game = ViewBag.Game, subject = item.Name, id = item.SubjectID })</div>
+    <div> - @Html.ActionLink(item.Name, "Forum", new { id = item.SubjectID })</div>
 }

@@ -35,12 +35,9 @@
                             <li>
                                 <a href="@Url.Action("Index", "Home", new { area = "" })">Home</a>
                             </li>
-                            @if (User.Identity.IsAuthenticated)
-                            {
-                                <li>
-                                    <a href="@Url.Action("Platforms", "Forum", new { area = "" })">Forum</a>
-                                </li>
-                            }
+                            <li>
+                                <a href="@Url.Action("Platforms", "Forum", new { area = "" })">Forum</a>
+                            </li>
                             <li>
                                 <a href="@Url.Action("About", "Home", new { area = "" })">About</a>
                             </li>

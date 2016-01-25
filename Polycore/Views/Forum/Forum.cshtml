@@ -37,22 +37,33 @@
 
 <h2>Comments</h2>
 
+@if (User.Identity.IsAuthenticated)
+{
 <h5>Add comment</h5>
 <div>
-    @using (Html.BeginForm("AddComment", "Forum", new { id = Model.PostID }))
+    @using (Html.BeginForm("AddComment", "Forum", new { subjectID = Model.SubjectID, postID = Model.PostID }))
     {
+        if (ViewBag.Controller == "Forum")
+        {
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+        }
         @Html.AntiForgeryToken()
-
-        @Html.TextAreaFor(m => m.CommentContent, new { id = "Textarea" })
-        <br />
+        <div>
+            @Html.TextAreaFor(m => m.CommentContent, new { id = "Textarea" })
+        </div>
         <input type="submit" value="Add" />
     }
 </div>
+}
+else
+{
+    <h5>Login to add comment</h5>
+}
 
 <p class="hr"><hr /></p>
 
 <div>
-    @foreach (var item in Model.Comments)
+    @foreach (var item in Model.Comments.OrderByDescending(c => c.CommentID))
     {
         <div>
             <b>PostedBy:</b> @item.User.UserName<br />

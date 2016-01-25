@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Polycore.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace Polycore.Models
 {
     public class ForumViewModel
     {
-        // Get Set the model id's.
-        public int PostID { get; set; }
+        // Get Set the model id's.        
         public int PlatformID { get; set; }
         public int GameID { get; set; }
+        public int SubjectID { get; set; }
+        public int PostID { get; set; }
 
         // Get Set names for posts titles.
         public string PlatformName { get; set; }
@@ -27,6 +29,7 @@ namespace Polycore.Models
         public string PostUserName { get; set; }
 
         // Get Set comment content in model.
+        [Required]
         public string CommentContent { get; set; }
 
         // Get Set games in a list to get the available platforms of that game.
