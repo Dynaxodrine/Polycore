@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Polycore.Models;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace Polycore.Models
 {
@@ -29,7 +30,8 @@ namespace Polycore.Models
         public string PostUserName { get; set; }
 
         // Get Set comment content in model.
-        [Required]
+        [AllowHtml]
+        [Required(ErrorMessage = "Comment is required.")]
         public string CommentContent { get; set; }
 
         // Get Set games in a list to get the available platforms of that game.

@@ -1,6 +1,6 @@
-﻿@model Polycore.Models.AddUserRoleViewModel
+﻿@model Polycore.Models.NewsArticleModel
 @{
-    ViewBag.Title = "Add role to user";
+    ViewBag.Title = "Edit news article";
     if (!User.IsInRole("Administrator"))
     {
         Layout = "~/Views/Shared/_Error.cshtml";
@@ -10,8 +10,8 @@
     <div class="template-wrapper">
         <div class="block block-page_header_block span12 first ">
             <div class="span12 block-title centered">
-                <h2>Roles</h2>
-                <p>Here you can add and remove roles of users? <small><i>Cool!</i></small></p>
+                <h2>News articles</h2>
+                <p>Here you can add, edit and remove news articles? <small><i>Cool!</i></small></p>
             </div>
             <div class="span12 block-divider"></div>
         </div>
@@ -22,33 +22,34 @@
             <div class="title-wrapper">
                 <h3 class="widget-title">
                     <i class="fa fa-users"></i>
-                    Add Role to @Model.UserName
+                    Edit news article
                 </h3>
                 <div class="clear"></div>
             </div>
             <div class="wcontainer">
-                @using (Html.BeginForm("AddRoleToUser", "Admin", FormMethod.Post))
+                @using (Html.BeginForm("EditNewsArticle", "Admin", FormMethod.Post))
                 {
-                    if (ViewBag.Controller == "AddRoleToUser")
+                    if (ViewBag.Controller == "EditArticle")
                     {
-                        @Html.ValidationSummary("", new {@class = "text-danger"})
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
                     }
                     @Html.AntiForgeryToken()
-                    <b>Roles</b><br />
-                    <select name="rolename">
-                        <option></option>
-                        @foreach (var item in Model.RoleList)
-                        {
-                            <option value="@item.Name">@item.Name</option>
-                        }
-                    </select>
-                    <br/><br />
+                    <div>
+                        <b>Title</b><br />
+                        @Html.TextBoxFor(m => m.Title)
+                    </div>
+                    <div>
+                        <b>Content</b><br />
+                        @Html.TextAreaFor(m => m.Content, new { id = "Textarea" })
+                    </div>
+                    <br />
                     <div>
                         <input type="submit" value="Add" class="button-green button-small">
-                        @Html.ActionLink("Back", "Roles", new { id = Model.UserId }, new { @class = "actionlink" })
+                        @Html.ActionLink("Back", "NewsArticles", null, new { @class = "actionlink" })
                     </div>
                 }
             </div>
         </div>
     </div>
 </div>
+

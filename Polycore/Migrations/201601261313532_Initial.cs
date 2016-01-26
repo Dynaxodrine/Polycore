@@ -12,7 +12,7 @@ namespace Polycore.Migrations
                 c => new
                     {
                         CommentID = c.Int(nullable: false, identity: true),
-                        Content = c.String(),
+                        Content = c.String(nullable: false),
                         Commented = c.DateTime(),
                         Likes = c.Int(nullable: false),
                         Dislikes = c.Int(nullable: false),
@@ -36,8 +36,8 @@ namespace Polycore.Migrations
                 c => new
                     {
                         NewsArticleID = c.Int(nullable: false, identity: true),
-                        Title = c.String(),
-                        Content = c.String(),
+                        Title = c.String(nullable: false),
+                        Content = c.String(nullable: false),
                         Published = c.DateTime(nullable: false),
                         User_Id = c.String(maxLength: 128),
                     })

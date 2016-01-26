@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Polycore.Models;
+using System.Data.Entity;
 
 namespace Polycore.Controllers
 {
@@ -66,14 +67,63 @@ namespace Polycore.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //[Authorize(Roles = "Administrator")]
-        //public ActionResult AddNewsArticle()
-        //{
-        //    ViewBag.Controller = "AddPosts";
-        //    return View();
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
+        public ActionResult AddNewsArticle(NewsArticleModel model)
+        {
+            string userID = User.Identity.GetUserId();
+            ApplicationUser account = db.Users.FirstOrDefault(a => a.Id == userID);
+            if (ModelState.IsValid)
+            {
+                model.User = account;
+                model.Published = DateTime.Now;
+                model.Title = HttpUtility.HtmlEncode(model.Title);
+                model.Content = HttpUtility.HtmlEncode(model.Content);
+
+                db.NewsArticles.Add(model);
+                db.SaveChanges();
+
+                return RedirectToAction("NewsArticles");
+            }
+
+            ViewBag.Controller = "AddArticle";
+            return View(model);
+        }
+
+        [Authorize(Roles = "Administrator")]
+        public ActionResult EditNewsArticle(int id = 0)
+        {
+            Session["NewsArticleID"] = id;
+            NewsArticleModel newsarticle = db.NewsArticles.FirstOrDefault(m => m.NewsArticleID == id);
+            if (newsarticle == null)
+            {
+                return HttpNotFound();
+            }
+            return View(newsarticle);
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
+        public ActionResult EditNewsArticle(NewsArticleModel model)
+        {
+            model.NewsArticleID = (int)Session["NewsArticleID"];
+            if (ModelState.IsValid)
+            {
+                model.Published = DateTime.Now;
+                model.Title = HttpUtility.HtmlEncode(model.Title);
+                model.Content = HttpUtility.HtmlEncode(model.Content);
+
+                db.Entry(model).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("NewsArticles");
+            }
+
+            ViewBag.Controller = "EditArticle";
+            return View(model);
+        }
 
         [HttpPost]
         [Authorize(Roles = "Administrator")]

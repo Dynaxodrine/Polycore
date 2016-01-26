@@ -11,7 +11,7 @@
         <div class="block block-page_header_block span12 first ">
             <div class="span12 block-title centered">
                 <h2>News articles</h2>
-                <p>Here you can add and remove news articles? <small><i>Cool!</i></small></p>
+                <p>Here you can add, edit and remove news articles? <small><i>Cool!</i></small></p>
             </div>
             <div class="span12 block-divider"></div>
         </div>
@@ -22,30 +22,30 @@
             <div class="title-wrapper">
                 <h3 class="widget-title">
                     <i class="fa fa-users"></i>
-                    Add News article
+                    Add news article
                 </h3>
                 <div class="clear"></div>
             </div>
             <div class="wcontainer">
-                @using (Html.BeginForm("AddPosts", "Admin", FormMethod.Post))
+                @using (Html.BeginForm("AddNewsArticle", "Admin", FormMethod.Post))
                 {
-                    if (ViewBag.Controller == "AddPosts")
+                    if (ViewBag.Controller == "AddArticle")
                     {
                         @Html.ValidationSummary("", new { @class = "text-danger" })
                     }
                     @Html.AntiForgeryToken()
+                    <div>
+                        <b>Title</b><br />
+                        @Html.TextBoxFor(m => m.Title)                                               
+                    </div>                    
+                    <div>
+                        <b>Content</b><br />
+                        @Html.TextAreaFor(m => m.Content, new { id = "Textarea" })
+                    </div>
                     <br />
-                    @*<select name="userid">
-                        <option></option>
-                        @foreach (var item in Model)
-                        {
-                            <option value="@item">@item</option>
-                        }
-                    </select>*@
-                    <br /><br />
                     <div>
                         <input type="submit" value="Add" class="button-green button-small">
-                        ,@Html.ActionLink("Back", "NewsArticles", null, new { @class = "actionlink" })
+                        @Html.ActionLink("Back", "NewsArticles", null, new { @class = "actionlink" })
                     </div>
                 }
             </div>

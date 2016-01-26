@@ -44,8 +44,8 @@
                             <td>@item.User.UserName</td>
                             <td>@item.Published</td>
                             <td>
-                                @Html.ActionLink(" ", "AddNewsArticle", "Admin", new { id = item.NewsArticleID }, new { @class = "fa fa-fw fa-info" })
-                                @Html.ActionLink(" ", "AddNewsArticle", "Admin", new { id = item.NewsArticleID }, new { @class = "fa fa-fw fa-users" })
+                                @Html.ActionLink(" ", "EditNewsArticle", "Admin", new { id = item.NewsArticleID }, new { @class = "fa fa-fw fa-info" })
+                                @Html.ActionLink(" ", "EditNewsArticle", "Admin", new { id = item.NewsArticleID }, new { @class = "fa fa-fw fa-users" })
                                 @Ajax.ActionLink(" ", "DeleteNewsArticle", new { id = item.NewsArticleID }, new AjaxOptions
                                 {
                                     Confirm = "Are you sure the news article with title: " + item.Title + " must be deleted?",
@@ -57,6 +57,7 @@
                     }
                 </table>
                 <br />
+                @Html.ActionLink("Add News Article", "AddNewsArticle", "Admin", null, new { @class = "button-green button-small" })
                 @Html.ActionLink("Back", "Dashboard", "Admin", null, new Dictionary<string, object>() { { "class", "button-green button-small" } })
             </div>
         </div>

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Polycore.Models
 {
@@ -12,6 +13,8 @@ namespace Polycore.Models
     {
         [Key]
         public int CommentID { get; set; }
+        [AllowHtml]
+        [Required(ErrorMessage = "Comment is required.")]
         public string Content { get; set; }
         public DateTime? Commented { get; set; }
         public int Likes { get; set; }

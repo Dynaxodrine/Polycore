@@ -38,17 +38,11 @@ namespace Polycore.Controllers
         {
             SubjectModel subjects = db.Subjects.FirstOrDefault(s => s.SubjectID == id);
             PostModel posts = db.Posts.FirstOrDefault(p => p.Subject.SubjectID == id);
-            
-            if (id == 0 && posts == null)
+            if (subjects == null && posts == null)
             {
                 return HttpNotFound();
             }
-            else if (message != "")
-            {
-                ViewBag.Controller = "Forum";
-                ModelState.AddModelError("", message);
-            }
-
+            
             var result = new ForumViewModel()
             {
                 // Get Set the model id's.                
@@ -76,13 +70,14 @@ namespace Polycore.Controllers
                 // Get Set list of comments for under the posts.
                 Comments = posts.Comments,
             };
-                       
+
+            ViewBag.Controller = "Forum";
+            ModelState.AddModelError("", message);
             return View(result);
         }
 
         // POST: /Forum/Forum/1?platform=PC&game=Starcraft 2 Legacy of the Void&subject=test
         [HttpPost]
-        [ValidateInput(false)]
         [ValidateAntiForgeryToken]
         public ActionResult AddComment(ForumViewModel model, string message, int subjectID = 0, int postID = 0)
         {
