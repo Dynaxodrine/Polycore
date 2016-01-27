@@ -182,10 +182,9 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModel.cs" />
-    <Compile Include="Models\BrowseForumViewModel.cs" />
     <Compile Include="Models\CommentModel.cs" />
     <Compile Include="Models\PlatformModel.cs" />
-    <Compile Include="Models\ForumIndexViewModel.cs" />
+    <Compile Include="Models\ForumViewModel.cs" />
     <Compile Include="Models\GameModel.cs" />
     <Compile Include="Models\IdentityModel.cs" />
     <Compile Include="Models\ManageViewModel.cs" />
@@ -418,7 +417,7 @@
     <Content Include="Views\Forum\Subjects.cshtml" />
     <Content Include="Views\Forum\Platforms.cshtml" />
     <Content Include="Views\Forum\Games.cshtml" />
-    <Content Include="Views\Forum\Forum.cshtml" />
+    <Content Include="Views\Forum\Index.cshtml" />
     <Content Include="Views\Admin\Roles.cshtml" />
     <Content Include="Views\Shared\_Error.cshtml" />
     <Content Include="Views\Admin\AddNewsArticle.cshtml" />

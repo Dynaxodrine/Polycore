@@ -58,7 +58,7 @@ namespace Polycore.Controllers
         }
 
         // GET: /Forum/Forum/1?platform=PC&game=Starcraft 2 Legacy of the Void&subject=test
-        public ActionResult Forum(int id = 0)
+        public ActionResult Index(string message, int id = 0)
         {
             SubjectModel subjects = db.Subjects.FirstOrDefault(s => s.SubjectID == id);
             PostModel posts = db.Posts.FirstOrDefault(p => p.Subject.SubjectID == id);
@@ -96,14 +96,14 @@ namespace Polycore.Controllers
             };
             
             ViewBag.Controller = "Forum";
-            ModelState.AddModelError("", (string)Session["Message"]);
+            ModelState.AddModelError("", message);
             return View(result);
         }
 
         // POST: /Forum/Forum/1?platform=PC&game=Starcraft 2 Legacy of the Void&subject=test
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddComment(ForumIndexViewModel model, int subjectID = 0, int postID = 0)
+        public ActionResult AddComment(string message, ForumIndexViewModel model, int subjectID = 0, int postID = 0)
         {
             // Get the post of the post id and the current logged in user id.
             string userID = User.Identity.GetUserId();
@@ -121,12 +121,12 @@ namespace Polycore.Controllers
                 db.Comments.Add(comment);
                 db.SaveChanges();
 
-                Session["Message"] = "Comment added.";
-                return RedirectToAction("Forum", new { id = subjectID });
+                message = "Comment added.";
+                return RedirectToAction("Index", new { message, id = subjectID });
             }
 
-            Session["Message"] = "Comment required.";
-            return RedirectToAction("Forum", new { id = subjectID });
+            message = "Comment required.";
+            return RedirectToAction("Index", new { message, id = subjectID });
         }
 
         // Dispose the dbcontext.

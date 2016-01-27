@@ -1,7 +1,7 @@
 ﻿@model Polycore.Models.BrowseForumViewModel
 
 @{
-    ViewBag.Title = "Subjects";
+    ViewBag.Title = "Browse subjects";
 }
 
 <h2>
@@ -28,7 +28,7 @@
                         <li class="bbp-forum-info">
                             <i class="icon-comments"></i>
                             <a class="bbp-forum-title" href="topic.html" title="Adventure">
-                                @Html.ActionLink(item.Name, "Forum", new { id = item.SubjectID })
+                                @Html.ActionLink(item.Name, "Index", new { id = item.SubjectID })
                             </a>
                             <div class="bbp-forum-content">
                                 <p>@item.Description</p>
