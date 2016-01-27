@@ -19,27 +19,39 @@ namespace Polycore.Controllers
         }
 
         // GET: /Forum/Games/2?platform=PC
-        public ActionResult Games(string platform, int id = 0)
+        public ActionResult Games(int id = 0)
         {
+            PlatformModel platform = db.Platforms.FirstOrDefault(p => p.PlatformID == id);
+            if (platform == null)
+            {
+                return HttpNotFound();
+            }
+
             var result = new BrowseForumViewModel
             {
-                PlatformName = platform,
-                Games = db.Games.Where(g => g.Platform != null && g.Platform.PlatformID == id).ToList(),
+                PlatformName = platform.Name,
+                Games = platform.Games.Where(g => g.Platform != null && g.Platform.PlatformID == id).ToList(),
             };
 
             return View(result);
         }
 
         // GET: /Forum/Subjects/1?platform=PC&game=Starcraft 2 Legacy of the Void
-        public ActionResult Subjects(string platform, string game, int platformid = 0, int gameid = 0)
+        public ActionResult Subjects(int id = 0)
         {
+            GameModel game = db.Games.FirstOrDefault(g => g.GameID == id);
+            if (game == null)
+            {
+                return HttpNotFound();
+            }
+
             var result = new BrowseForumViewModel
             {
-                PlatformID = platformid,
-                GameID = gameid,
-                PlatformName = platform, 
-                GameName = game,           
-                Subjects = db.Subjects.Where(s => s.Game != null && s.Game.GameID == gameid).ToList(),
+                PlatformID = game.Platform.PlatformID,
+                GameID = game.GameID,
+                PlatformName = game.Platform.Name, 
+                GameName = game.Name,           
+                Subjects = game.Subjects.Where(s => s.Game != null && s.Game.GameID == id).ToList(),
             };
 
             return View(result);

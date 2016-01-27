@@ -6,8 +6,8 @@
 
 <h2>Forum >
     @Html.ActionLink(Model.PlatformName, "Platforms", "Forum") > 
-    @Html.ActionLink(Model.GameName, "Games", new { platform = Model.PlatformName, id = Model.PlatformID }) >
-    @Html.ActionLink(Model.SubjectName, "Subjects", new { platform = Model.PlatformName, game = Model.GameName, gameid = Model.GameID })    
+    @Html.ActionLink(Model.GameName, "Games", new { id = Model.PlatformID }) >
+    @Html.ActionLink(Model.SubjectName, "Subjects", new { id = Model.GameID })    
 </h2>
 
 <h5>@Model.PostTitle</h5>
@@ -27,7 +27,7 @@
         if (item.Platform.Name != Model.PlatformName)
         {
             <br />
-            <text>- </text>@Html.ActionLink(item.Platform.Name, "Subjects", new { platform = item.Platform.Name, game = item.Name, gameid = item.GameID })
+            <text>- </text>@Html.ActionLink(item.Platform.Name, "Subjects", new { id = item.GameID })
         }
         else if (Model.Games.Count() == 1)
         {            

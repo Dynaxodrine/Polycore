@@ -24,7 +24,7 @@
                         <li class="bbp-forum-info">
                             <i class="icon-comments"></i>
                             <a class="bbp-forum-title" href="topic.html" title="Adventure">
-                                @Html.ActionLink(item.Name, "Games", new { platform = item.Name, id = item.PlatformID })
+                                @Html.ActionLink(item.Name, "Games", new { id = item.PlatformID })
                             </a>
                             <div class="bbp-forum-content">
                                 <p>@item.Description</p>
