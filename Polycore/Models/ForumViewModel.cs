@@ -31,7 +31,7 @@ namespace Polycore.Models
 
         // Get Set comment content in model.
         [AllowHtml]
-        [Required(ErrorMessage = "Comment is required.")]
+        [Required]
         public string CommentContent { get; set; }
 
         // Get Set games in a list to get the available platforms of that game.

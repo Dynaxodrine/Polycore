@@ -10,7 +10,7 @@ namespace Polycore.Controllers
 {
     public class ForumController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: /Forum/Platforms
         public ActionResult Platforms()
@@ -34,7 +34,7 @@ namespace Polycore.Controllers
         }
 
         // GET: /Forum/Forum/1?platform=PC&game=Starcraft 2 Legacy of the Void&subject=test
-        public ActionResult Forum(string message, int id = 0)
+        public ActionResult Forum(int id = 0)
         {
             SubjectModel subjects = db.Subjects.FirstOrDefault(s => s.SubjectID == id);
             PostModel posts = db.Posts.FirstOrDefault(p => p.Subject.SubjectID == id);
@@ -70,16 +70,16 @@ namespace Polycore.Controllers
                 // Get Set list of comments for under the posts.
                 Comments = posts.Comments,
             };
-
+            
             ViewBag.Controller = "Forum";
-            ModelState.AddModelError("", message);
+            ModelState.AddModelError("", (string)Session["Message"]);
             return View(result);
         }
 
         // POST: /Forum/Forum/1?platform=PC&game=Starcraft 2 Legacy of the Void&subject=test
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddComment(ForumViewModel model, string message, int subjectID = 0, int postID = 0)
+        public ActionResult AddComment(ForumViewModel model, int subjectID = 0, int postID = 0)
         {
             // Get the post of the post id and the current logged in user id.
             string userID = User.Identity.GetUserId();
@@ -97,12 +97,12 @@ namespace Polycore.Controllers
                 db.Comments.Add(comment);
                 db.SaveChanges();
 
-                message = "Comment added.";
-                return RedirectToAction("Forum", new { message, id = subjectID });
+                Session["Message"] = "Comment added.";
+                return RedirectToAction("Forum", new { id = subjectID });
             }
 
-            message = "Comment required.";
-            return RedirectToAction("Forum", new { message, id = subjectID });
+            Session["Message"] = "Comment required.";
+            return RedirectToAction("Forum", new { id = subjectID });
         }
 
         // Dispose the dbcontext.

@@ -14,7 +14,7 @@ namespace Polycore.Models
         [Key]
         public int CommentID { get; set; }
         [AllowHtml]
-        [Required(ErrorMessage = "Comment is required.")]
+        [Required]
         public string Content { get; set; }
         public DateTime? Commented { get; set; }
         public int Likes { get; set; }

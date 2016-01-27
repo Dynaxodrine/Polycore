@@ -130,7 +130,6 @@ namespace Polycore.Controllers
         public ActionResult DeleteNewsArticle(int id = 0)
         {
             NewsArticleModel newsarticle = db.NewsArticles.Find(id);
-
             if (newsarticle != null)
             {
                 db.NewsArticles.Remove(newsarticle);
@@ -153,7 +152,6 @@ namespace Polycore.Controllers
         public ActionResult DeleteUser(string id)
         {
             var account = UserManager.FindById(id);
-
             if (account != null)
             {
                 // Remove user.
@@ -168,7 +166,6 @@ namespace Polycore.Controllers
         public ActionResult Roles(string id)
         {
             var account = UserManager.FindById(id);
-
             var userroles = UserManager.GetRoles(id);
             var roles = new UserRoleViewModel
             {
@@ -181,15 +178,14 @@ namespace Polycore.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        public ActionResult AddRoleToUser(ApplicationDbContext model, string id)
+        public ActionResult AddRoleToUser(string id)
         {
             var account = UserManager.FindById(id);
-
             var roles = new AddUserRoleViewModel
             {
                 UserId = account.Id,
                 UserName = account.UserName,
-                RoleList = model.Roles,
+                RoleList = db.Roles,
             };
 
             return View(roles);
@@ -199,10 +195,9 @@ namespace Polycore.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
-        public ActionResult AddRoleToUser(ApplicationDbContext model, string rolename, string id)
+        public ActionResult AddRoleToUser(string rolename, string id)
         {
             var account = UserManager.FindById(id);
-
             if (rolename != "")
             {
                 // Add role to user.
@@ -217,7 +212,7 @@ namespace Polycore.Controllers
             {
                 UserId = account.Id,
                 UserName = account.UserName,
-                RoleList = model.Roles,
+                RoleList = db.Roles,
             };
 
             ViewBag.Controller = "AddRoleToUser";
@@ -229,7 +224,6 @@ namespace Polycore.Controllers
         public ActionResult DeleteRoleFromUser(string id, string rolename)
         {
             var account = UserManager.FindById(id);
-
             if (account != null && rolename != "")
             {
                 // Remove role from user.
@@ -238,6 +232,13 @@ namespace Polycore.Controllers
                 return RedirectToAction("Roles", new { id = account.Id });
             }
             return View();
+        }
+
+        // Dispose the dbcontext.
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
         }
     }
 }
