@@ -4,9 +4,47 @@
     ViewBag.Title = "Platforms";
 }
 
-<h2>Consoles</h2>
+<h2>Forum</h2>
 
-@foreach (var item in Model)
-{
-    <div> - @Html.ActionLink(item.Name, "Games", new { platform = item.Name, id = item.PlatformID })</div>
-}
+<div class="span12">
+    <div id="bbpress-forums">
+        <ul id="forums-list-0" class="bbp-forums">
+            <li class="bbp-header">
+                <ul class="forum-titles">
+                    <li class="bbp-forum-info">Platforms</li>
+                    <li class="bbp-forum-topic-count">Total games</li>
+                    <li class="bbp-forum-freshness">Freshness</li>
+                </ul>
+            </li>
+            <!-- .bbp-header -->
+            @foreach (var item in Model)
+            {
+                <li class="bbp-body">
+                    <ul class="post-963 forum type-forum status-publish hentry loop-item-0 odd bbp-forum-status-open bbp-forum-visibility-publish instock">
+                        <li class="bbp-forum-info">
+                            <i class="icon-comments"></i>
+                            <a class="bbp-forum-title" href="topic.html" title="Adventure">
+                                @Html.ActionLink(item.Name, "Games", new { platform = item.Name, id = item.PlatformID })
+                            </a>
+                            <div class="bbp-forum-content">
+                                <p>@item.Description</p>
+                            </div>
+                        </li>
+                        <li class="bbp-forum-topic-count">@item.Games.Count()</li>
+                        <li class="bbp-forum-freshness">
+                            <a href="#" title="Pellentesque malesuada urna ac magna dictum ultricies">6 months ago</a>
+                            <p class="bbp-topic-meta">
+                                <span class="bbp-topic-freshness-author">
+                                    <a href="#" title="View admin's profile" class="bbp-author-avatar" rel="nofollow">
+                                        <img alt="" src="http://1.gravatar.com/avatar/38d93eff4c0db34aa79f07cf9ad1a89c?s=14&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D14&amp;r=G" class="avatar avatar-14 photo" height="14" width="14">
+                                    </a>&nbsp;<a href="#" title="View admin's profile" class="bbp-author-name" rel="nofollow">admin</a>
+                                </span>
+                            </p>
+                        </li>
+                    </ul>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+

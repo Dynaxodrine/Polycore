@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Polycore.Models
 {
-    public class ForumViewModel
+    public class ForumIndexViewModel
     {
         // Get Set the model id's.        
         public int PlatformID { get; set; }

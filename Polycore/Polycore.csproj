@@ -182,9 +182,10 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModel.cs" />
+    <Compile Include="Models\BrowseForumViewModel.cs" />
     <Compile Include="Models\CommentModel.cs" />
     <Compile Include="Models\PlatformModel.cs" />
-    <Compile Include="Models\ForumViewModel.cs" />
+    <Compile Include="Models\ForumIndexViewModel.cs" />
     <Compile Include="Models\GameModel.cs" />
     <Compile Include="Models\IdentityModel.cs" />
     <Compile Include="Models\ManageViewModel.cs" />

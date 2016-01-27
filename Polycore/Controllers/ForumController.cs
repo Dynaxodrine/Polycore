@@ -21,16 +21,28 @@ namespace Polycore.Controllers
         // GET: /Forum/Games/2?platform=PC
         public ActionResult Games(string platform, int id = 0)
         {
-            ViewBag.Platform = platform;
-            return View(db.Games.Where(g => g.Platform != null && g.Platform.PlatformID == id));
+            var result = new BrowseForumViewModel
+            {
+                PlatformName = platform,
+                Games = db.Games.Where(g => g.Platform != null && g.Platform.PlatformID == id).ToList(),
+            };
+
+            return View(result);
         }
 
         // GET: /Forum/Subjects/1?platform=PC&game=Starcraft 2 Legacy of the Void
-        public ActionResult Subjects(string platform, string game, int id = 0)
+        public ActionResult Subjects(string platform, string game, int platformid = 0, int gameid = 0)
         {
-            ViewBag.Platform = platform;
-            ViewBag.Game = game;
-            return View(db.Subjects.Where(s => s.Game != null && s.Game.GameID == id));
+            var result = new BrowseForumViewModel
+            {
+                PlatformID = platformid,
+                GameID = gameid,
+                PlatformName = platform, 
+                GameName = game,           
+                Subjects = db.Subjects.Where(s => s.Game != null && s.Game.GameID == gameid).ToList(),
+            };
+
+            return View(result);
         }
 
         // GET: /Forum/Forum/1?platform=PC&game=Starcraft 2 Legacy of the Void&subject=test
@@ -38,12 +50,12 @@ namespace Polycore.Controllers
         {
             SubjectModel subjects = db.Subjects.FirstOrDefault(s => s.SubjectID == id);
             PostModel posts = db.Posts.FirstOrDefault(p => p.Subject.SubjectID == id);
-            if (subjects == null && posts == null)
+            if (subjects == null || posts == null)
             {
                 return HttpNotFound();
             }
             
-            var result = new ForumViewModel()
+            var result = new ForumIndexViewModel()
             {
                 // Get Set the model id's.                
                 PlatformID = subjects.Game.Platform.PlatformID,
@@ -79,7 +91,7 @@ namespace Polycore.Controllers
         // POST: /Forum/Forum/1?platform=PC&game=Starcraft 2 Legacy of the Void&subject=test
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddComment(ForumViewModel model, int subjectID = 0, int postID = 0)
+        public ActionResult AddComment(ForumIndexViewModel model, int subjectID = 0, int postID = 0)
         {
             // Get the post of the post id and the current logged in user id.
             string userID = User.Identity.GetUserId();
