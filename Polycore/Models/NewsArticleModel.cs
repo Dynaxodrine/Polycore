@@ -19,7 +19,6 @@ namespace Polycore.Models
         [AllowHtml]
         [Required (ErrorMessage = "Content is required.")]
         public string Content { get; set; }
-        [Required]
         public bool Hide { get; set; }
         public DateTime Published { get; set; }
 

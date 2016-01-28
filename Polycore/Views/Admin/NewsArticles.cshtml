@@ -33,6 +33,7 @@
                             <th>Title</th>
                             <th>User name</th>
                             <th>Published</th>
+                            <th>Hide article</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -43,6 +44,7 @@
                             <td>@item.Title</td>
                             <td>@item.User.UserName</td>
                             <td>@item.Published</td>
+                            <td>@item.Hide</td>
                             <td>
                                 @Html.ActionLink(" ", "EditNewsArticle", "Admin", new { id = item.NewsArticleID }, new { @class = "fa fa-fw fa-info" })
                                 @Html.ActionLink(" ", "EditNewsArticle", "Admin", new { id = item.NewsArticleID }, new { @class = "fa fa-fw fa-users" })

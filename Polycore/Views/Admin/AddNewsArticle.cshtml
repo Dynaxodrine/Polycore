@@ -43,13 +43,8 @@
                         @Html.TextAreaFor(m => m.Content, new { id = "Textarea" })
                     </div>
                     <div>
-                        <b>Hide news article</b><br />
-                        <div class="radiobuttons">
-                            <input id="radiobutton" type="radio" name="hide" value="True" /><label id="radiob">Yes</label>
-                        </div>
-                        <div class="radiobuttons">
-                            <input id="radiobutton" type="radio" name="hide" value="False" /><label id="radiob">No</label>
-                        </div>
+                        <b>Hide article?</b><br />
+                        @Html.CheckBoxFor(m => m.Hide)
                     </div>
                     <br />
                     <div>
