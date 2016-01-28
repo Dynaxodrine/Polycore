@@ -42,6 +42,15 @@
                         <b>Content</b><br />
                         @Html.TextAreaFor(m => m.Content, new { id = "Textarea" })
                     </div>
+                    <div>
+                        <b>Hide news article</b><br />
+                        <div class="radiobuttons">
+                            <input id="radiobutton" type="radio" name="hide" value="True" checked="@((Model.Hide = true))" /><label id="radiob">Yes</label>
+                        </div>
+                        <div class="radiobuttons">
+                            <input id="radiobutton" type="radio" name="hide" value="False" checked="@((Model.Hide = false))" /><label id="radiob">No</label>
+                        </div>
+                    </div>
                     <br />
                     <div>
                         <input type="submit" value="Add" class="button-green button-small">

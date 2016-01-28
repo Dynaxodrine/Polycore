@@ -38,6 +38,7 @@ namespace Polycore.Migrations
                         NewsArticleID = c.Int(nullable: false, identity: true),
                         Title = c.String(nullable: false),
                         Content = c.String(nullable: false),
+                        Hide = c.Boolean(nullable: false),
                         Published = c.DateTime(nullable: false),
                         User_Id = c.String(maxLength: 128),
                     })
