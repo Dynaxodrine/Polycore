@@ -6,10 +6,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Polycore.Models
+namespace Polycore.Models.Forum
 {
     [Table("NewsArticles")]
-    public class NewsArticleModel
+    public class NewsArticle
     {
         [Key]
         public int NewsArticleID { get; set; }
@@ -23,6 +23,6 @@ namespace Polycore.Models
         public DateTime Published { get; set; }
 
         public virtual ApplicationUser User { get; set; }
-        public virtual List<CommentModel> Comments { get; set; }
+        public virtual List<Comment> Comments { get; set; }
     }
 }

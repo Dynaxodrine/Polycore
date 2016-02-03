@@ -162,6 +162,36 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\Core\CoreBase.cs" />
+    <Compile Include="API\Core\Steam\App.cs" />
+    <Compile Include="API\Core\Steam\AppList.cs" />
+    <Compile Include="API\Core\Steam\Apps.cs" />
+    <Compile Include="API\Core\Steam\GameList.cs" />
+    <Compile Include="API\Core\Steam\SteamCore.cs" />
+    <Compile Include="API\Core\Steam\SteamGame.cs" />
+    <Compile Include="API\Core\TGDB\BoxArt.cs" />
+    <Compile Include="API\Core\TGDB\BoxArtSide.cs" />
+    <Compile Include="API\Core\TGDB\Game\SimilarGame.cs" />
+    <Compile Include="API\Core\TGDB\Game\TGDBGame.cs" />
+    <Compile Include="API\Core\TGDB\PlatformGames\GameSummary.cs" />
+    <Compile Include="API\Core\TGDB\Platforms\PlatformSummary.cs" />
+    <Compile Include="API\Core\TGDB\Platform\TGDBPlatform.cs" />
+    <Compile Include="API\Core\TGDB\TGDBArt.cs" />
+    <Compile Include="API\Core\TGDB\TGDBCore.cs" />
+    <Compile Include="API\Core\Twitch\Games\GameSearchResult.cs" />
+    <Compile Include="API\Core\Twitch\Games\TwitchGame.cs" />
+    <Compile Include="API\Core\Twitch\Games\TwitchRawGame.cs" />
+    <Compile Include="API\Core\Twitch\Streams\StreamSearchResult.cs" />
+    <Compile Include="API\Core\Twitch\Streams\TwitchChannel.cs" />
+    <Compile Include="API\Core\Twitch\Streams\TwitchRawChannel.cs" />
+    <Compile Include="API\Core\Twitch\Streams\TwitchRawStream.cs" />
+    <Compile Include="API\Core\Twitch\Streams\TwitchStream.cs" />
+    <Compile Include="API\Core\Twitch\StreamType.cs" />
+    <Compile Include="API\Core\Twitch\TwitchAPIArt.cs" />
+    <Compile Include="API\Core\Twitch\TwitchCore.cs" />
+    <Compile Include="API\Steam.cs" />
+    <Compile Include="API\TGDB.cs" />
+    <Compile Include="API\Twitch.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -176,23 +206,34 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601281417066_Initial.cs" />
-    <Compile Include="Migrations\201601281417066_Initial.Designer.cs">
-      <DependentUpon>201601281417066_Initial.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountViewModel.cs" />
-    <Compile Include="Models\CommentModel.cs" />
-    <Compile Include="Models\PlatformModel.cs" />
-    <Compile Include="Models\ForumViewModel.cs" />
-    <Compile Include="Models\GameModel.cs" />
-    <Compile Include="Models\IdentityModel.cs" />
-    <Compile Include="Models\ManageViewModel.cs" />
-    <Compile Include="Models\NewsArticleModel.cs" />
-    <Compile Include="Models\PostModel.cs" />
-    <Compile Include="Models\SubjectModel.cs" />
+    <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\Forum\Comment.cs" />
+    <Compile Include="Models\Forum\GameSubject.cs" />
+    <Compile Include="Models\Forum\NewsArticle.cs" />
+    <Compile Include="Models\Forum\Post.cs" />
+    <Compile Include="Models\Forum\Subject.cs" />
+    <Compile Include="Models\Games\Art.cs" />
+    <Compile Include="Models\Games\BaseModel.cs" />
+    <Compile Include="Models\Games\CoOp.cs" />
+    <Compile Include="Models\Games\Developer.cs" />
+    <Compile Include="Models\Games\Esrb.cs" />
+    <Compile Include="Models\Games\Game.cs" />
+    <Compile Include="Models\Games\Genre.cs" />
+    <Compile Include="Models\Games\Platform.cs" />
+    <Compile Include="Models\Games\Players.cs" />
+    <Compile Include="Models\Games\Publisher.cs" />
+    <Compile Include="Models\Games\Steam\SteamGame.cs" />
+    <Compile Include="Models\Games\Twitch\TwitchArt.cs" />
+    <Compile Include="Models\Games\Twitch\TwitchGame.cs" />
+    <Compile Include="Models\Views\AccountViewModel.cs" />
+    <Compile Include="Models\Views\DashboardViewModel.cs" />
+    <Compile Include="Models\Views\BrowseForumViewModel.cs" />
+    <Compile Include="Models\Views\ManageViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="StringHelpers.cs" />
     <Compile Include="Types.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -422,11 +463,6 @@
     <Content Include="Views\Shared\_Error.cshtml" />
     <Content Include="Views\Admin\AddNewsArticle.cshtml" />
     <Content Include="Views\Admin\EditNewsArticle.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201601281417066_Initial.resx">
-      <DependentUpon>201601281417066_Initial.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

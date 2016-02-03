@@ -5,11 +5,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Polycore.Models.Forum;
 
-namespace Polycore.Models
+namespace Polycore.Models.Forum
 {
     [Table("Comments")]
-    public class CommentModel
+    public class Comment
     {
         [Key]
         public int CommentID { get; set; }
@@ -21,9 +22,9 @@ namespace Polycore.Models
         public int Dislikes { get; set; }
 
         public virtual ApplicationUser User { get; set; }
-        public virtual PostModel Post { get; set; }
-        public virtual NewsArticleModel NewsArticle { get; set; }
-        public virtual CommentModel CommentParent { get; set; }
-        public virtual List<CommentModel> Comments { get; set; }
+        public virtual Post Post { get; set; }
+        public virtual NewsArticle NewsArticle { get; set; }
+        public virtual Comment CommentParent { get; set; }
+        public virtual List<Comment> Comments { get; set; }
     }
 }

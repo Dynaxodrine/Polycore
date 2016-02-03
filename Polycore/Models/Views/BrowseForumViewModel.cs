@@ -5,8 +5,10 @@ using System.Web;
 using Polycore.Models;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using Polycore.Models.Forum;
+using Polycore.Models.Games;
 
-namespace Polycore.Models
+namespace Polycore.Models.Views
 {
     public class BrowseForumViewModel
     {
@@ -20,13 +22,13 @@ namespace Polycore.Models
         public string GameName { get; set; }
 
         // Get Set list of platforms.
-        public virtual List<PlatformModel> Platforms { get; set; }
+        public virtual List<Platform> Platforms { get; set; }
 
         // Get Set list of games.
-        public virtual List<GameModel> Games { get; set; }
+        public virtual List<GameSubject> Games { get; set; }
 
         // Get Set list og subjects.
-        public virtual List<SubjectModel> Subjects { get; set; }
+        public virtual List<Subject> Subjects { get; set; }
     }
 
     public class ForumIndexViewModel
@@ -51,10 +53,10 @@ namespace Polycore.Models
         public string PostUserName { get; set; }
         
         // Get Set games in a list to get the available platforms of that game.
-        public virtual List<GameModel> Games { get; set; }
+        public virtual List<GameSubject> Games { get; set; }
         
         // Get Set list of comments for under the posts.
-        public virtual List<CommentModel> Comments { get; set; }
+        public virtual List<Comment> Comments { get; set; }
 
         // Get Set comment content in model.
         [AllowHtml]

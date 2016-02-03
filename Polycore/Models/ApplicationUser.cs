@@ -8,6 +8,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Polycore.Models.Forum;
 
 namespace Polycore.Models
 {
@@ -20,9 +21,9 @@ namespace Polycore.Models
         public string AboutMe { get; set; }
         public Types.Gender Gender { get; set; }
 
-        public virtual List<PostModel> Posts { get; set; }
-        public virtual List<CommentModel> Comments { get; set; }
-        public virtual List<NewsArticleModel> NewsArticles { get; set; }
+        public virtual List<Post> Posts { get; set; }
+        public virtual List<Comment> Comments { get; set; }
+        public virtual List<NewsArticle> NewsArticles { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -33,7 +34,7 @@ namespace Polycore.Models
         }
     }
     
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    /*public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         
         public ApplicationDbContext()
@@ -44,13 +45,13 @@ namespace Polycore.Models
         public DbSet<SubjectModel> Subjects { get; set; }
         public DbSet<GameModel> Games { get; set; }
         public DbSet<PlatformModel> Platforms { get; set; }
-        public DbSet<CommentModel> Comments { get; set; }
+        public DbSet<Comment> Comments { get; set; }
         public DbSet<PostModel> Posts { get; set; }
-        public DbSet<NewsArticleModel> NewsArticles { get; set; }
+        public DbSet<NewsArticle> NewsArticles { get; set; }
         
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
-    }
+    }*/
 }

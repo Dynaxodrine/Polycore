@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Polycore.Models.Forum;
+using Polycore.Models.Games;
+using Polycore.Models.Views;
 
 namespace Polycore.Controllers
 {
@@ -21,7 +24,7 @@ namespace Polycore.Controllers
         // GET: /Forum/Games/2?platform=PC
         public ActionResult Games(int id = 0)
         {
-            PlatformModel platform = db.Platforms.FirstOrDefault(p => p.PlatformID == id);
+            Platform platform = db.Platforms.FirstOrDefault(p => p.PlatformId == id);
             if (platform == null)
             {
                 return HttpNotFound();
@@ -30,7 +33,7 @@ namespace Polycore.Controllers
             var result = new BrowseForumViewModel
             {
                 PlatformName = platform.Name,
-                Games = platform.Games.Where(g => g.Platform != null && g.Platform.PlatformID == id).ToList(),
+                Games = platform.Games.Where(g => g.Platform != null && g.Platform.PlatformId == id).ToList(),
             };
 
             return View(result);
@@ -39,7 +42,7 @@ namespace Polycore.Controllers
         // GET: /Forum/Subjects/1?platform=PC&game=Starcraft 2 Legacy of the Void
         public ActionResult Subjects(int id = 0)
         {
-            GameModel game = db.Games.FirstOrDefault(g => g.GameID == id);
+            GameSubject game = db.GameSubjects.FirstOrDefault(g => g.GameSubjectID == id);
             if (game == null)
             {
                 return HttpNotFound();
@@ -47,11 +50,11 @@ namespace Polycore.Controllers
 
             var result = new BrowseForumViewModel
             {
-                PlatformID = game.Platform.PlatformID,
-                GameID = game.GameID,
+                PlatformID = game.Platform.PlatformId,
+                GameID = game.GameSubjectID,
                 PlatformName = game.Platform.Name, 
-                GameName = game.Name,           
-                Subjects = game.Subjects.Where(s => s.Game != null && s.Game.GameID == id).ToList(),
+                GameName = "TODO: FIX THIS",           
+                Subjects = game.Subjects.Where(s => s.Game != null && s.Game.GameSubjectID == id).ToList(),
             };
 
             return View(result);
@@ -60,8 +63,8 @@ namespace Polycore.Controllers
         // GET: /Forum/Forum/1?platform=PC&game=Starcraft 2 Legacy of the Void&subject=test
         public ActionResult Index(string message, int id = 0)
         {
-            SubjectModel subjects = db.Subjects.FirstOrDefault(s => s.SubjectID == id);
-            PostModel posts = db.Posts.FirstOrDefault(p => p.Subject.SubjectID == id);
+            Subject subjects = db.Subjects.FirstOrDefault(s => s.SubjectID == id);
+            Post posts = db.Posts.FirstOrDefault(p => p.Subject.SubjectID == id);
             if (subjects == null || posts == null)
             {
                 return HttpNotFound();
@@ -70,14 +73,14 @@ namespace Polycore.Controllers
             var result = new ForumIndexViewModel()
             {
                 // Get Set the model id's.                
-                PlatformID = subjects.Game.Platform.PlatformID,
-                GameID = subjects.Game.GameID,
+                PlatformID = subjects.Game.Platform.PlatformId,
+                GameID = subjects.Game.GameSubjectID,
                 SubjectID = subjects.SubjectID,
                 PostID = posts.PostID,
 
                 // Get Set names for posts titles.
                 PlatformName = subjects.Game.Platform.Name,
-                GameName = subjects.Game.Name,
+                GameName = "TODO: FIX THIS",
                 SubjectName = subjects.Name,
 
                 // Get Set the posts content items.
@@ -89,7 +92,8 @@ namespace Polycore.Controllers
                 PostUserName = posts.User.UserName,
 
                 // Get Set games in a list to get the available platforms of that game.
-                Games = db.Games.Where(g => g.Name == subjects.Game.Name).ToList(),    
+                //TODO: FIX THIS!
+                Games = db.GameSubjects/*.Where(g => g.Name == subjects.Game.Name)*/.ToList(),    
 
                 // Get Set list of comments for under the posts.
                 Comments = posts.Comments,
@@ -108,11 +112,11 @@ namespace Polycore.Controllers
             // Get the post of the post id and the current logged in user id.
             string userID = User.Identity.GetUserId();
             ApplicationUser account = db.Users.FirstOrDefault(a => a.Id == userID);
-            PostModel post = db.Posts.FirstOrDefault(p => p.PostID == postID);
+            Post post = db.Posts.FirstOrDefault(p => p.PostID == postID);
             
             if (ModelState.IsValid)
             {
-                CommentModel comment = new CommentModel();
+                Comment comment = new Comment();
                 comment.Content = HttpUtility.HtmlEncode(model.CommentContent);
                 comment.Commented = DateTime.Now;
                 comment.User = account;

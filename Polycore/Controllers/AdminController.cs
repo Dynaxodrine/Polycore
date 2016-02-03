@@ -7,6 +7,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Polycore.Models;
 using System.Data.Entity;
+using Polycore.Models.Forum;
+using Polycore.Models.Views;
 
 namespace Polycore.Controllers
 {
@@ -70,7 +72,7 @@ namespace Polycore.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
-        public ActionResult AddNewsArticle(NewsArticleModel model)
+        public ActionResult AddNewsArticle(NewsArticle model)
         {
             string userID = User.Identity.GetUserId();
             ApplicationUser account = db.Users.FirstOrDefault(a => a.Id == userID);
@@ -95,7 +97,7 @@ namespace Polycore.Controllers
         public ActionResult EditNewsArticle(int id = 0)
         {
             Session["NewsArticleID"] = id;
-            NewsArticleModel newsarticle = db.NewsArticles.FirstOrDefault(m => m.NewsArticleID == id);
+            NewsArticle newsarticle = db.NewsArticles.FirstOrDefault(m => m.NewsArticleID == id);
             if (newsarticle == null)
             {
                 return HttpNotFound();
@@ -106,7 +108,7 @@ namespace Polycore.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
-        public ActionResult EditNewsArticle(NewsArticleModel model)
+        public ActionResult EditNewsArticle(NewsArticle model)
         {
             model.NewsArticleID = (int)Session["NewsArticleID"];
             if (ModelState.IsValid)
@@ -129,7 +131,7 @@ namespace Polycore.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult DeleteNewsArticle(int id = 0)
         {
-            NewsArticleModel newsarticle = db.NewsArticles.Find(id);
+            NewsArticle newsarticle = db.NewsArticles.Find(id);
             if (newsarticle != null)
             {
                 db.NewsArticles.Remove(newsarticle);

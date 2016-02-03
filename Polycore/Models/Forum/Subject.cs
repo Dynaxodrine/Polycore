@@ -15,7 +15,7 @@ namespace Polycore.Models.Forum
         public string Name { get; set; }
         public string Description { get; set; }
         
-        public virtual Games.Game Game { get; set; }
+        public virtual GameSubject Game { get; set; }
         public virtual Subject SubjectParent { get; set; }
         public virtual List<Subject> Subjects { get; set; }
         public virtual List<Post> Posts { get; set; }

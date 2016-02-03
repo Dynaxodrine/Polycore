@@ -61,7 +61,7 @@ namespace Polycore.Controllers
 
         public ActionResult Subjects(int id = 0)
         {
-            return View(db.Subjects.Where(s => s.Game != null && s.Game.GameID == id));
+            return View(db.Subjects.Where(s => s.Game != null && s.Game.GameSubjectID == id));
         }
 
         public ActionResult Titles(int id = 0)
@@ -79,7 +79,7 @@ namespace Polycore.Controllers
                 return HttpNotFound();
             }
 
-            var result = new ForumViewModel()
+            var result = new ForumIndexViewModel()
             {
                 PostID = post.PostID,
                 PostTitle = post.Title,
@@ -96,7 +96,7 @@ namespace Polycore.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddComment(ForumViewModel model, int id = 0)
+        public ActionResult AddComment(ForumIndexViewModel model, int id = 0)
         {
             if (ModelState.IsValid)
             {
