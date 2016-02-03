@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
+using Polycore.Models.Games;
 
-namespace Polycore.Models
+namespace Polycore.Models.Forum
 {
     [Table("Subjects")]
-    public class SubjectModel
+    public class Subject
     {
         [Key]
         public int SubjectID { get; set; }
@@ -16,9 +15,9 @@ namespace Polycore.Models
         public string Name { get; set; }
         public string Description { get; set; }
         
-        public virtual GameModel Game { get; set; }
-        public virtual SubjectModel SubjectParent { get; set; }
-        public virtual List<SubjectModel> Subjects { get; set; }
-        public virtual List<PostModel> Posts { get; set; }
+        public virtual Games.Game Game { get; set; }
+        public virtual Subject SubjectParent { get; set; }
+        public virtual List<Subject> Subjects { get; set; }
+        public virtual List<Post> Posts { get; set; }
     }
 }

@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
-namespace Polycore.Models
+namespace Polycore.Models.Forum
 {
     [Table("Posts")]
-    public class PostModel
+    public class Post
     {
         [Key]
         public int PostID { get; set; }
@@ -19,8 +17,8 @@ namespace Polycore.Models
         public int Likes { get; set; }
         public int Dislikes { get; set; }
 
-        public virtual SubjectModel Subject { get; set; }
-        public virtual List<CommentModel> Comments { get; set; }
+        public virtual Subject Subject { get; set; }
+        public virtual List<Comment> Comments { get; set; }
         public virtual ApplicationUser User { get; set; }
     }
 }

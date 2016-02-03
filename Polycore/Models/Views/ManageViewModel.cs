@@ -4,7 +4,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace Polycore.Models
+namespace Polycore.Models.Views
 {
     public class IndexViewModel
     {

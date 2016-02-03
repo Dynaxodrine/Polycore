@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Polycore.Models
+namespace Polycore.Models.Views
 {
     public class ExternalLoginConfirmationViewModel
     {

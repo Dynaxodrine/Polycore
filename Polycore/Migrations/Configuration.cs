@@ -60,29 +60,20 @@ namespace Polycore.Migrations
             manager.Create(hugo, "123456");
             manager.AddToRole(hugo.Id, "Administrator");
             manager.AddToRole(hugo.Id, "Member");
-
-            //var consoles = new List<ConsoleModel>{
-            //    new ConsoleModel { Name = "PC" },
-            //    new ConsoleModel { Name = "Xbox One" },
-            //    new ConsoleModel { Name = "Playstation 4" }
-            //};
-
-            //consoles.ForEach(c => context.Consoles.AddOrUpdate(m => m.Name, c));
-            //context.SaveChanges();
-
-            //var games = new List<GameModel>{
-            //    new GameModel { Name = "Starcraft 2 legacy of the void" },
-            //    new GameModel { Name = "Halo 5" },
-            //    new GameModel { Name = "Mass effect Adromeda" }
+            
+            //var games = new List<Game>{
+            //    new Game { Name = "Starcraft 2 legacy of the void" },
+            //    new Game { Name = "Halo 5" },
+            //    new Game { Name = "Mass effect Adromeda" }
             //};
 
             //games.ForEach(c => context.Games.AddOrUpdate(m => m.Name, c));
             //context.SaveChanges();
 
-            //var subjects = new List<SubjectModel>{
-            //    new SubjectModel { Name = "test1" },
-            //    new SubjectModel { Name = "test2" },
-            //    new SubjectModel { Name = "test3" }
+            //var subjects = new List<Subject>{
+            //    new Subject { Name = "test1" },
+            //    new Subject { Name = "test2" },
+            //    new Subject { Name = "test3" }
             //};
 
             //subjects.ForEach(c => context.Subjects.AddOrUpdate(m => m.Name, c));
