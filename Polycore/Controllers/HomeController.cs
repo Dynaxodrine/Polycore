@@ -23,6 +23,7 @@ namespace Polycore.Controllers
             var platforms = TGDB.GetPlatformList();
             var games = new Dictionary<int, TGDBGame>();
             var gameSummaries = new Dictionary<string, List<PlatformSummary>>();
+            /*
             foreach(var platform in platforms)
                 foreach(var gs in TGDB.GetPlatformGamesList(platform.Id))
                     if(!gameSummaries.ContainsKey(gs.Title))
@@ -33,6 +34,7 @@ namespace Polycore.Controllers
             foreach(var gsps in gameSummaries)    
                 if(gsps.Value.Count > 1)
                     Console.WriteLine($"MORE DEN ONE: {gsps.Key} - {gsps.Value.Count}");
+            */
 
             return View();
         }
