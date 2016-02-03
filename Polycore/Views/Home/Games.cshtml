@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Polycore.Models.GameModel>
+﻿@model IEnumerable<Polycore.Models.Forum.GameSubject>
 
 @{
     ViewBag.Title = "Games";
@@ -10,6 +10,6 @@
 {
     foreach (var item in Model)
     {
-        <div> - @Html.ActionLink(item.Name, "Subjects", new { id = item.GameID })</div>
+        <div> - @Html.ActionLink(item.Details.Title, "Subjects", new { id = item.GameSubjectID })</div>
     }
 }

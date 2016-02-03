@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Polycore.Models;
+using Polycore.Models.Views;
 
 namespace Polycore.Controllers
 {
@@ -85,7 +86,7 @@ namespace Polycore.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult DeleteNewsArticle(int id = 0)
         {
-            NewsArticleModel newsarticle = db.NewsArticles.Find(id);
+            NewsArticle newsarticle = db.NewsArticles.Find(id);
 
             if (newsarticle != null)
             {

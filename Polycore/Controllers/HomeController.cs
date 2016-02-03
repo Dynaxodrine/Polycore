@@ -4,7 +4,13 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Polycore.API;
+using Polycore.API.Core.TGDB;
+using Polycore.API.Core.TGDB.PlatformGames;
+using Polycore.API.Core.TGDB.Platforms;
 using Polycore.Models;
+using Polycore.Models.Forum;
+using Polycore.Models.Views;
 
 namespace Polycore.Controllers
 {
@@ -14,6 +20,20 @@ namespace Polycore.Controllers
 
         public ActionResult Index()
         {
+            var platforms = TGDB.GetPlatformList();
+            var games = new Dictionary<int, TGDBGame>();
+            var gameSummaries = new Dictionary<string, List<PlatformSummary>>();
+            foreach(var platform in platforms)
+                foreach(var gs in TGDB.GetPlatformGamesList(platform.Id))
+                    if(!gameSummaries.ContainsKey(gs.Title))
+                        gameSummaries.Add(gs.Title, new List<PlatformSummary>() {platform});
+                    else
+                        gameSummaries[gs.Title].Add(platform);
+                        
+            foreach(var gsps in gameSummaries)    
+                if(gsps.Value.Count > 1)
+                    Console.WriteLine($"MORE DEN ONE: {gsps.Key} - {gsps.Value.Count}");
+
             return View();
         }
 
@@ -29,12 +49,12 @@ namespace Polycore.Controllers
 
         public ActionResult Consoles()
         {
-            return View(db.Consoles.ToList());
+            return View(db.Platforms.ToList());
         }
 
         public ActionResult Games(int id = 0)
         {
-            return View(db.Games.ToList().Where(g => g.Console.ConsoleID == id));
+            return View(db.GameSubjects.ToList().Where(g => g.Platform.PlatformId == id));
         }
 
         public ActionResult Subjects(int id = 0)
@@ -49,7 +69,7 @@ namespace Polycore.Controllers
 
         public ActionResult Forum(int id = 0)
         {
-            PostModel post = db.Posts.SingleOrDefault(p => p.PostID == id);
+            Post post = db.Posts.SingleOrDefault(p => p.PostID == id);
 
 
             if (post == null)
@@ -78,7 +98,7 @@ namespace Polycore.Controllers
         {
             if (ModelState.IsValid)
             {
-                CommentModel comment = new CommentModel();
+                Comment comment = new Comment();
                 comment.Content = model.CommentContent;
                 comment.Commented = DateTime.Now;
 

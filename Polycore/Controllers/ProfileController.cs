@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Polycore.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Polycore.Models.Views;
 
 namespace Polycore.Controllers
 {
